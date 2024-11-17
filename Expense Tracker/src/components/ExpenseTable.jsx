@@ -1,7 +1,8 @@
 import deleteimage from "../assets/delete.svg";
 import editimage from "../assets/edit.svg";
 
-const ExpenseTable = () => {
+const ExpenseTable = (props) => {
+  const expenseData = props.expenseData;
   return (
     <>
       <div className="expense-container">
@@ -51,45 +52,34 @@ const ExpenseTable = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Expense on Pizza</td>
-              <td>2000</td>
-              <td>
-                <div>
-                  <button type="button" className="table-button">
-                    <img src={editimage} alt="" />
-                    Edit
-                  </button>
-                  <button type="button" className="table-button">
-                    <img src={deleteimage} alt="" />
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Expense on Pizza</td>
-              <td>2000</td>
-              <td>
-                <div>
-                  <button type="button" className="table-button">
-                    <img src={editimage} alt="" />
-                    Edit
-                  </button>
-                  <button type="button" className="table-button">
-                    <img src={deleteimage} alt="" />
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
+            {expenseData.map((item) => {
+              return (
+                <tr key={item.id}>
+                  <td>{item.id}</td>
+                  <td>{item.description}</td>
+                  <td>{parseInt(item.amount)}</td>
+                  <td>
+                    <div>
+                      <button type="button" className="table-button">
+                        <img src={editimage} alt="" />
+                        Edit
+                      </button>
+                      <button type="button" className="table-button">
+                        <img src={deleteimage} alt="" />
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
     </>
   );
 };
+
+ExpenseTable.propTypes;
 
 export default ExpenseTable;

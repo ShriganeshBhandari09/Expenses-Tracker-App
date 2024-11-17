@@ -190,13 +190,15 @@ button:focus-visible {
 
 .primary-btn:hover,
 .secondary-btn:hover,
-.search-container:hover {
+.search-container:hover, .table-button:hover {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .expense-container {
   border: 1px solid black;
   border-radius: 20px;
   padding: 0px 5px 5px 5px;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .expense-container table {
@@ -208,10 +210,13 @@ button:focus-visible {
 tbody tr td,
 thead tr th {
   text-align: center;
-  padding-top: 20px;
+  padding-top: 10px;
   padding-right: 10px;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
   font-weight: 700;
+}
+thead {
+  border-bottom: 1px solid black;
 }
 
 tbody tr {
@@ -241,6 +246,7 @@ tbody tr td div {
   font-size: 16px;
   background-color: #ecedff;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .opacity {
@@ -250,12 +256,12 @@ tbody tr td div {
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  display: none;
+  /* display: none; */
 }
 
 .add-budget-input-container,
 .add-expense-input-container {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -267,7 +273,7 @@ tbody tr td div {
   gap: 30px;
   border-radius: 20px;
   z-index: 232323;
-  display: none;
+  /* display: none; */
 }
 
 .close-button {
@@ -280,14 +286,14 @@ tbody tr td div {
   cursor: pointer;
 }
 
-.add-budget-input-container div,
-.add-expense-input-container div {
+.add-budget-input-container form,
+.add-expense-input-container form {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.add-budget-input-container div label,
-.add-expense-input-container div label {
+.add-budget-input-container form label,
+.add-expense-input-container form label {
   font-size: 20px;
 }
 
@@ -368,4 +374,8 @@ tbody tr td div {
     padding: 8px 20px;
     gap: 8px;
   }
+
+  /* tbody tr:hover{
+    background-color: ;
+  } */
 }
