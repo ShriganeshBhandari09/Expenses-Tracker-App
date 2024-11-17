@@ -89,7 +89,7 @@ const Data = [
   },
 ];
 const ExpenseApp = () => {
-  const [budget, setBudget] = useState(0);
+  const [budget, setBudget] = useState(500);
   const [expense] = useState(500);
   const [expenseData, setExpenseData] = useState(Data);
   const [isOpen, setIsOpen] = useState(false);
@@ -138,10 +138,10 @@ const ExpenseApp = () => {
           budget={budget}
           handleBudgetChange={handleBudgetChange}
         /> */}
-        <AddExpenseModal
+        {/* <AddExpenseModal
           expenseData={expenseData}
           handleExpenseData={handleExpenseData}
-        />
+        /> */}
       </div>
     </>
   );
