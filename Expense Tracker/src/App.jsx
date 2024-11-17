@@ -1,14 +1,12 @@
-import './App.css'
-import ExpenseApp from './components/ExpenseApp'
-import Navbar from './components/Navbar'
+import "./App.css";
+import ExpenseApp from "./components/ExpenseApp";
 
 function App() {
   return (
     <>
-    <Navbar/>
-    <ExpenseApp/>
+      <ExpenseApp />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
