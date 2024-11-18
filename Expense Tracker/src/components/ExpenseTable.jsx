@@ -52,9 +52,9 @@ const ExpenseTable = (props) => {
             </tr>
           </thead>
           <tbody>
-            {expenseData.map((item) => {
+            {expenseData.map((item, index) => {
               return (
-                <tr key={item.id}>
+                <tr key={index}>
                   <td>{item.id}</td>
                   <td>{item.description}</td>
                   <td>{parseInt(item.amount)}</td>

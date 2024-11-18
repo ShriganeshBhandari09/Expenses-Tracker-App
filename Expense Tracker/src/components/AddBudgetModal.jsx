@@ -1,19 +1,32 @@
 import { useState } from "react";
 
-const AddBudgetModal = ({ budget, handleBudgetChange }) => {
+const AddBudgetModal = ({
+  budget,
+  handleBudgetChange,
+  open,
+  handleModalChange,
+}) => {
   const [inputBudget, setInputBudget] = useState(budget);
+  const [isOpen, setIsOpen] = useState(open);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleBudgetChange(inputBudget);
-    setInputBudget("")
+    handleModalChange(setIsOpen(!isOpen));
+    setInputBudget("");
+  };
+
+  const closePopUp = () => {
+    handleModalChange(setIsOpen(!isOpen));
   };
 
   return (
     <>
       <div className="opacity"></div>
       <div className="add-budget-input-container">
-        <span className="close-button">&times;</span>
+        <span className="close-button" onClick={closePopUp}>
+          &times;
+        </span>
         <h2>Add Budget</h2>
         <form>
           <label htmlFor="amount">Enter Amount</label>
@@ -22,6 +35,7 @@ const AddBudgetModal = ({ budget, handleBudgetChange }) => {
             name="amount"
             placeholder="Enter Amount"
             onChange={(e) => setInputBudget(e.target.value)}
+            required
           />
           <button className="primary-btn" onClick={handleSubmit}>
             Submit Budget

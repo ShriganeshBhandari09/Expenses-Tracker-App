@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Budget from "./common/Budget";
 import Navbar from "./Navbar";
 import SecondaryButton from "./common/SecondaryButton";
@@ -87,22 +87,43 @@ const Data = [
     amount: 8.5,
     description: "Evening snacks",
   },
+  {
+    id: 10,
+    date: "2024-11-10",
+    category: "Foods & Drinks",
+    amount: 8.5,
+    description: "Evening snacks",
+  },
 ];
 const ExpenseApp = () => {
-  const [budget, setBudget] = useState(500);
-  const [expense] = useState(500);
+  const [budget, setBudget] = useState(0);
+  const [expense, setExpense] = useState(0);
   const [expenseData, setExpenseData] = useState(Data);
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const calculateExpense = () => {
+      let result = expenseData.reduce((acc, item) => {
+        return acc + item.amount;
+      }, 0);
+      setExpense(result.toFixed(0));
+    };
+    calculateExpense();
+  }, [expenseData]);
 
   const handleBudgetChange = (newBudget) => {
     setBudget(newBudget);
   };
 
-  const handleExpenseData = (newData) => {
-    const newExpenseData = [...expenseData];
-    newExpenseData.push(newData);
-    setExpenseData(newExpenseData);
+  const handleModalChange = (newOpen) => {
+    setIsOpen(newOpen);
+    console.log(isOpen);
   };
+  // const handleExpenseData = (newData) => {
+  //   const newExpenseData = [...expenseData];
+  //   newExpenseData.push(newData);
+  //   setExpenseData(newExpenseData);
+  // };
 
   return (
     <>
@@ -125,19 +146,23 @@ const ExpenseApp = () => {
           <PrimaryButton
             buttonname="Add Budget"
             image={addimage}
-            open={isOpen}
+            handleModalChange={handleModalChange}
           />
           <PrimaryButton
             buttonname="Add Expense"
             image={addimage}
-            open={isOpen}
+            handleModalChange={handleModalChange}
           />
         </div>
         <ExpenseTable expenseData={expenseData} />
-        {/* <AddBudgetModal
-          budget={budget}
-          handleBudgetChange={handleBudgetChange}
-        /> */}
+        {isOpen && (
+          <AddBudgetModal
+            budget={budget}
+            handleBudgetChange={handleBudgetChange}
+            open={isOpen}
+            handleModalChange={handleModalChange}
+          />
+        )}
         {/* <AddExpenseModal
           expenseData={expenseData}
           handleExpenseData={handleExpenseData}
