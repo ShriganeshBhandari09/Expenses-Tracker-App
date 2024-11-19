@@ -99,7 +99,8 @@ const ExpenseApp = () => {
   const [budget, setBudget] = useState(0);
   const [expense, setExpense] = useState(0);
   const [expenseData, setExpenseData] = useState(Data);
-  const [isOpen, setIsOpen] = useState(false);
+  const [BudgetModalOpen, setBudgetModalOpen] = useState(false);
+  const [ExpenseModalOpen, setExpenseModalOpen] = useState(false);
 
   useEffect(() => {
     const calculateExpense = () => {
@@ -115,9 +116,24 @@ const ExpenseApp = () => {
     setBudget(newBudget);
   };
 
-  const handleModalChange = (newOpen) => {
-    setIsOpen(newOpen);
-    console.log(isOpen);
+  const handleBudgetModalChange = () => {
+    // setIsOpen(newOpen);
+    // console.log(BudgetModalOpen);
+    if (BudgetModalOpen) {
+      setBudgetModalOpen(false);
+    } else {
+      setBudgetModalOpen(true);
+    }
+  };
+
+  const handleExpenseModalChange = () => {
+    // setIsOpen(newOpen);
+    // console.log(BudgetModalOpen);
+    if (ExpenseModalOpen) {
+      setExpenseModalOpen(false);
+    } else {
+      setExpenseModalOpen(true);
+    }
   };
   // const handleExpenseData = (newData) => {
   //   const newExpenseData = [...expenseData];
@@ -146,27 +162,31 @@ const ExpenseApp = () => {
           <PrimaryButton
             buttonname="Add Budget"
             image={addimage}
-            handleModalChange={handleModalChange}
+            handelModalChange={handleBudgetModalChange}
           />
           <PrimaryButton
             buttonname="Add Expense"
             image={addimage}
-            handleModalChange={handleModalChange}
+            handelModalChange={handleExpenseModalChange}
           />
         </div>
         <ExpenseTable expenseData={expenseData} />
-        {isOpen && (
+        {BudgetModalOpen && (
           <AddBudgetModal
             budget={budget}
             handleBudgetChange={handleBudgetChange}
-            open={isOpen}
-            handleModalChange={handleModalChange}
+            open={BudgetModalOpen}
+            handleBudgetModalChange={handleBudgetModalChange}
           />
         )}
-        {/* <AddExpenseModal
-          expenseData={expenseData}
-          handleExpenseData={handleExpenseData}
-        /> */}
+        {ExpenseModalOpen && (
+          <AddExpenseModal
+            expenseData={expenseData}
+            // handleExpenseData={handleExpenseData}
+            open={ExpenseModalOpen}
+            handleExpenseModalChange={handleExpenseModalChange}
+          />
+        )}
       </div>
     </>
   );

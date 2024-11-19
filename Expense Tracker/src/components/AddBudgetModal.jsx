@@ -4,7 +4,7 @@ const AddBudgetModal = ({
   budget,
   handleBudgetChange,
   open,
-  handleModalChange,
+  handleBudgetModalChange,
 }) => {
   const [inputBudget, setInputBudget] = useState(budget);
   const [isOpen, setIsOpen] = useState(open);
@@ -12,17 +12,17 @@ const AddBudgetModal = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     handleBudgetChange(inputBudget);
-    handleModalChange(setIsOpen(!isOpen));
+    handleBudgetModalChange(setIsOpen(!isOpen));
     setInputBudget("");
   };
 
   const closePopUp = () => {
-    handleModalChange(setIsOpen(!isOpen));
+    handleBudgetModalChange(setIsOpen(!isOpen));
   };
 
   return (
     <>
-      <div className="opacity"></div>
+      <div className="opacity" onClick={closePopUp}></div>
       <div className="add-budget-input-container">
         <span className="close-button" onClick={closePopUp}>
           &times;

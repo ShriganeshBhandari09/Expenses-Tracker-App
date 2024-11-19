@@ -1,7 +1,13 @@
 import { useState } from "react";
 
-const AddExpenseModal = ({ expenseData, handleExpenseData }) => {
+const AddExpenseModal = ({
+  expenseData,
+  handleExpenseData,
+  open,
+  handleExpenseModalChange,
+}) => {
   const [newData, setNewData] = useState(expenseData);
+  const [isOpen, setIsOpen] = useState(open);
   console.log(newData);
 
   const handleSubmit = (e) => {
@@ -9,12 +15,18 @@ const AddExpenseModal = ({ expenseData, handleExpenseData }) => {
     handleExpenseData(setNewData);
     setNewData("");
   };
+
+  const closePopUp = () => {
+    handleExpenseModalChange(setIsOpen(!isOpen));
+  };
   return (
     <>
-      <div className="opacity"></div>
+      <div className="opacity" onClick={closePopUp}></div>
 
       <div className="add-expense-input-container">
-        <span className="close-button">&times;</span>
+        <span className="close-button" onClick={closePopUp}>
+          &times;
+        </span>
         <h2>Add Expense</h2>
         <form>
           <label htmlFor="expense-name">Enter Expense Name</label>
