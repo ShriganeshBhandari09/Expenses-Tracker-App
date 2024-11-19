@@ -16,7 +16,7 @@ import PrimaryButton from "./common/PrimaryButton";
 import AddBudgetModal from "./AddBudgetModal";
 import AddExpenseModal from "./AddExpenseModal";
 
-const Data = [
+/*const Data = [
   {
     id: 1,
     date: "2024-11-01",
@@ -87,27 +87,29 @@ const Data = [
     amount: 8.5,
     description: "Evening snacks",
   },
-  {
-    id: 10,
-    date: "2024-11-10",
-    category: "Foods & Drinks",
-    amount: 8.5,
-    description: "Evening snacks",
-  },
-];
+
+];*/
+
+
 const ExpenseApp = () => {
   const [budget, setBudget] = useState(0);
   const [expense, setExpense] = useState(0);
-  const [expenseData, setExpenseData] = useState(Data);
+  const [expenseData, setExpenseData] = useState([]);
   const [BudgetModalOpen, setBudgetModalOpen] = useState(false);
   const [ExpenseModalOpen, setExpenseModalOpen] = useState(false);
 
+  const handleExpenseDataChange = (newExpesne) => {
+    const newExpensedata = [...expenseData, newExpesne];
+    setExpenseData(newExpensedata);
+  };
+
   useEffect(() => {
     const calculateExpense = () => {
+      console.log(expenseData);
       let result = expenseData.reduce((acc, item) => {
         return acc + item.amount;
       }, 0);
-      setExpense(result.toFixed(0));
+      setExpense(result);
     };
     calculateExpense();
   }, [expenseData]);
@@ -182,7 +184,7 @@ const ExpenseApp = () => {
         {ExpenseModalOpen && (
           <AddExpenseModal
             expenseData={expenseData}
-            // handleExpenseData={handleExpenseData}
+            handleExpenseData={handleExpenseDataChange}
             open={ExpenseModalOpen}
             handleExpenseModalChange={handleExpenseModalChange}
           />

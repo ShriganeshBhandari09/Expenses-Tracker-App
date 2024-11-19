@@ -5,8 +5,9 @@ const ExpenseTable = (props) => {
   const expenseData = props.expenseData;
   return (
     <>
-      <div className="expense-container">
-        {/* <div className="expense-container-heading">
+      { expenseData.length > 0 ?
+        <div className="expense-container">
+          {/* <div className="expense-container-heading">
           <p>Sr.</p>
           <p>Expense</p>
           <p>Amount</p>
@@ -42,40 +43,41 @@ const ExpenseTable = (props) => {
           <p><button type="button">Edit</button> <button type="button">Delete</button></p>
           </div>  
         </div> */}
-        <table>
-          <thead>
-            <tr>
-              <th>Sr.</th>
-              <th>Expense</th>
-              <th>Amount</th>
-              <th>Edit/Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {expenseData.map((item, index) => {
-              return (
-                <tr key={index}>
-                  <td>{item.id}</td>
-                  <td>{item.description}</td>
-                  <td>{parseInt(item.amount)}</td>
-                  <td>
-                    <div>
-                      <button type="button" className="table-button">
-                        <img src={editimage} alt="" />
-                        Edit
-                      </button>
-                      <button type="button" className="table-button">
-                        <img src={deleteimage} alt="" />
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Sr.</th>
+                <th>Expense</th>
+                <th>Amount</th>
+                <th>Edit/Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {expenseData.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{item.id}</td>
+                    <td>{item.description}</td>
+                    <td>{parseInt(item.amount)}</td>
+                    <td>
+                      <div>
+                        <button type="button" className="table-button">
+                          <img src={editimage} alt="" />
+                          Edit
+                        </button>
+                        <button type="button" className="table-button">
+                          <img src={deleteimage} alt="" />
+                          Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div> : <h2 className="warning">Add Your Expenses!!</h2>
+      }
     </>
   );
 };

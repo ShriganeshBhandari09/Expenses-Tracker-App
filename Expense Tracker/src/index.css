@@ -83,6 +83,7 @@ button:focus-visible {
   align-items: center;
   border-radius: 0px 0px 40px 40px;
   padding: 10px 20px;
+  height: 80px;
 }
 
 .navbar h1 {
@@ -190,7 +191,8 @@ button:focus-visible {
 
 .primary-btn:hover,
 .secondary-btn:hover,
-.search-container:hover, .table-button:hover {
+.search-container:hover,
+.table-button:hover {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .expense-container {
@@ -303,13 +305,18 @@ tbody tr td div {
 }
 
 .add-budget-input-container input,
-.add-expense-input-container input {
+.add-expense-input-container input,
+select {
   font-size: 24px;
   padding: 5px 10px;
   border-radius: 10px;
   border: none;
 }
 
+.warning {
+  text-align: center;
+  color: red;
+}
 @media (min-width: 768px) {
   .navbar h1 {
     font-size: 24px;
