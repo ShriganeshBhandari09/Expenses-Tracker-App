@@ -11,19 +11,40 @@ const AddExpenseModal = ({
   const [newExpenseAmount, setnewExpenseAmount] = useState("");
   const [isOpen, setIsOpen] = useState(open);
   // const [id, setid] = useState(0);
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const errors = {};
+    if (!newExpense) {
+      errors.newExpense = "Please Enter Expense.";
+    }
+    if (!category) {
+      errors.category = "Please Select Category";
+    }
+    if (!date) {
+      errors.date = "Please Select Date";
+    }
+    if (!newExpenseAmount) {
+      errors.newExpenseAmount = "Please Enter Amount";
+    }
+    setErrors(errors);
+    return Object.keys(errors).length === 0; // Return true if no errors
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Expense Name", newExpense);
-    console.log("Category", category);
-    console.log("Expense Amount", newExpenseAmount);
-    handleExpenseData({
-      description: newExpense,
-      category: category,
-      date: date,
-      amount: parseInt(newExpenseAmount),
-    });
-    handleExpenseModalChange(setIsOpen(!isOpen));
+    if (validate()) {
+      console.log("Expense Name", newExpense);
+      console.log("Category", category);
+      console.log("Expense Amount", newExpenseAmount);
+      handleExpenseData({
+        description: newExpense,
+        category: category,
+        date: date,
+        amount: parseInt(newExpenseAmount),
+      });
+      handleExpenseModalChange(setIsOpen(!isOpen));
+    }
   };
 
   const closePopUp = () => {
@@ -50,6 +71,9 @@ const AddExpenseModal = ({
               value={newExpense}
               onChange={(e) => setNewExpense(e.target.value)}
             />
+            {errors.newExpense && (
+              <span style={{ color: "red" }}>{errors.newExpense}</span>
+            )}
           </div>
           <div className="add-expense-div">
             <label htmlFor="date">Date</label>
@@ -60,6 +84,7 @@ const AddExpenseModal = ({
               value={date}
               onChange={(e) => setDate(e.target.value)}
             />
+            {errors.date && <span style={{ color: "red" }}>{errors.date}</span>}
           </div>
           <div className="add-expense-div">
             <label htmlFor="options">Category</label>
@@ -75,6 +100,9 @@ const AddExpenseModal = ({
               <option value="Travel">Travel</option>
               <option value="Health">Health</option>
             </select>
+            {errors.category && (
+              <span style={{ color: "red" }}>{errors.category}</span>
+            )}
           </div>
           <div className="add-expense-div">
             <label htmlFor="amount">Enter Amount</label>
@@ -86,6 +114,9 @@ const AddExpenseModal = ({
               value={newExpenseAmount}
               onChange={(e) => setnewExpenseAmount(e.target.value)}
             />
+            {errors.newExpenseAmount && (
+              <span style={{ color: "red" }}>{errors.newExpenseAmount}</span>
+            )}
           </div>
           <button className="primary-btn">Add Expense</button>
         </form>
