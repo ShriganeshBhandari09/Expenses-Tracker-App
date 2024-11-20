@@ -62,7 +62,7 @@ const ExpenseTable = (props) => {
                     <td>{item.date.split("-").reverse().join("-")}</td>
                     <td>{item.description}</td>
                     <td>{item.category}</td>
-                    <td>{parseInt(item.amount)}</td>
+                    <td>{parseInt(item.amount).toLocaleString()}</td>
                     <td>
                       <div className="table-button-div">
                         <button type="button" className="table-button">

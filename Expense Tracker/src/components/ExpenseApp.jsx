@@ -109,13 +109,13 @@ const ExpenseApp = () => {
       let result = expenseData.reduce((acc, item) => {
         return acc + item.amount;
       }, 0);
-      setExpense(result);
+      setExpense(parseInt(result).toLocaleString());
     };
     calculateExpense();
   }, [expenseData]);
 
   const handleBudgetChange = (newBudget) => {
-    setBudget(newBudget);
+    setBudget(parseInt(newBudget).toLocaleString());
   };
 
   const handleBudgetModalChange = () => {
@@ -138,6 +138,8 @@ const ExpenseApp = () => {
     }
   };
 
+  console.log(budget);
+
   // const handleCategoryChange = () => {
   //   const sortedExpenses = expenseData.filter((item) => {
   //     item.category === "Food And Drinks";
@@ -157,8 +159,8 @@ const ExpenseApp = () => {
       <div className="main-container">
         <h1 className="user-heading">Hello, Shriganesh</h1>
         <div className="budget-container">
-          <Budget title="Your Budget" budget={budget.toLocaleString()} image={budgetimage} />
-          <Budget title="Total Expense" budget={expense.toLocaleString()} image={expenseimage} />
+          <Budget title="Your Budget" budget={budget} image={budgetimage} />
+          <Budget title="Total Expense" budget={expense} image={expenseimage} />
         </div>
         {/* {budget < expense ? <div className="warning"><h2>Please manage expenses within the budget.</h2></div> : <div className="something"><h2>None</h2></div>} */}
         <div className="button-container">
