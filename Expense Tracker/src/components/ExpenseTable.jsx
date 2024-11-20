@@ -5,7 +5,7 @@ const ExpenseTable = (props) => {
   const expenseData = props.expenseData;
   return (
     <>
-      { expenseData.length > 0 ?
+      {expenseData.length > 0 ? (
         <div className="expense-container">
           {/* <div className="expense-container-heading">
           <p>Sr.</p>
@@ -46,21 +46,25 @@ const ExpenseTable = (props) => {
           <table>
             <thead>
               <tr>
-                <th>Sr.</th>
-                <th>Expense</th>
-                <th>Amount</th>
-                <th>Edit/Delete</th>
+                <th className="table-header">Sr.</th>
+                <th className="table-header">Date</th>
+                <th className="table-header">Expense</th>
+                <th className="table-header">Category</th>
+                <th className="table-header">Amount</th>
+                <th className="table-header">Edit / Delete</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="table-data">
               {expenseData.map((item, index) => {
                 return (
                   <tr key={index}>
                     <td>{item.id}</td>
+                    <td>{item.date.split("-").reverse().join("-")}</td>
                     <td>{item.description}</td>
+                    <td>{item.category}</td>
                     <td>{parseInt(item.amount)}</td>
                     <td>
-                      <div>
+                      <div className="table-button-div">
                         <button type="button" className="table-button">
                           <img src={editimage} alt="" />
                           Edit
@@ -76,8 +80,10 @@ const ExpenseTable = (props) => {
               })}
             </tbody>
           </table>
-        </div> : <h2 className="warning">Add Your Expenses!!</h2>
-      }
+        </div>
+      ) : (
+        <h2 className="warning">Add Your Expenses!!</h2>
+      )}
     </>
   );
 };

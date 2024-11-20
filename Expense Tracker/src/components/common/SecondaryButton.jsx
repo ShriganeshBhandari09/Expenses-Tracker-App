@@ -1,9 +1,8 @@
-
-const SecondaryButton = (props) => {
+const SecondaryButton = ({ image, buttonname , handleCategoryChange }) => {
   return (
-    <button className="secondary-btn">
-      <img src={props.image} alt="" />
-      {props.buttonname}
+    <button className="secondary-btn" onClick={handleCategoryChange}>
+      {image ? <img src={image} alt="" /> : null}
+      {buttonname}
     </button>
   );
 };

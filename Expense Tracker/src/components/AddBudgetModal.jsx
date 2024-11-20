@@ -23,23 +23,26 @@ const AddBudgetModal = ({
   return (
     <>
       <div className="opacity" onClick={closePopUp}></div>
-      <div className="add-budget-input-container">
+      <div className="add-budget-container">
         <span className="close-button" onClick={closePopUp}>
           &times;
         </span>
-        <h2>Add Budget</h2>
-        <form>
-          <label htmlFor="amount">Enter Amount</label>
-          <input
-            type="number"
-            name="amount"
-            placeholder="Enter Amount"
-            onChange={(e) => setInputBudget(e.target.value)}
-            required
-          />
-          <button className="primary-btn" onClick={handleSubmit}>
-            Submit Budget
-          </button>
+        <div className="add-budget-header-container">
+          <h2 className="add-budget-heading">Add Budget</h2>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="add-budget-div">
+            <label htmlFor="amount">Enter Amount</label>
+            <input
+              type="number"
+              name="amount"
+              id="amount"
+              placeholder="Enter Amount"
+              onChange={(e) => setInputBudget(e.target.value)}
+              required
+            />
+          </div>
+          <button className="primary-btn">Submit Budget</button>
         </form>
       </div>
     </>

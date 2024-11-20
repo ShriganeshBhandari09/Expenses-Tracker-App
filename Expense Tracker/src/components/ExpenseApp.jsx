@@ -90,13 +90,13 @@ import AddExpenseModal from "./AddExpenseModal";
 
 ];*/
 
-
 const ExpenseApp = () => {
   const [budget, setBudget] = useState(0);
   const [expense, setExpense] = useState(0);
   const [expenseData, setExpenseData] = useState([]);
   const [BudgetModalOpen, setBudgetModalOpen] = useState(false);
   const [ExpenseModalOpen, setExpenseModalOpen] = useState(false);
+  // const [category, setcategory] = useState("");
 
   const handleExpenseDataChange = (newExpesne) => {
     const newExpensedata = [...expenseData, newExpesne];
@@ -137,6 +137,14 @@ const ExpenseApp = () => {
       setExpenseModalOpen(true);
     }
   };
+
+  // const handleCategoryChange = () => {
+  //   const sortedExpenses = expenseData.filter((item) => {
+  //     item.category === "Food And Drinks";
+  //   });
+  //   setExpenseData(sortedExpenses);
+  // };
+
   // const handleExpenseData = (newData) => {
   //   const newExpenseData = [...expenseData];
   //   newExpenseData.push(newData);
@@ -152,15 +160,32 @@ const ExpenseApp = () => {
           <Budget title="Your Budget" budget={budget} image={budgetimage} />
           <Budget title="Total Expense" budget={expense} image={expenseimage} />
         </div>
+        {/* {budget < expense ? <div className="warning"><h2>Please manage expenses within the budget.</h2></div> : <div className="something"><h2>None</h2></div>} */}
         <div className="button-container">
           <div className="search-container">
             <img src={searchimage} alt="" />
             <input type="text" placeholder="Search" />
           </div>
-          <SecondaryButton buttonname="Food And Drinks" image={foodimage} />
-          <SecondaryButton buttonname="Groceries" image={groceriesimage} />
-          <SecondaryButton buttonname="Travel" image={healthimage} />
-          <SecondaryButton buttonname="Health" image={travelimage} />
+          <SecondaryButton
+            buttonname="Food And Drinks"
+            image={foodimage}
+            // handleCategoryChange={handleCategoryChange}
+          />
+          <SecondaryButton
+            buttonname="Groceries"
+            image={groceriesimage}
+            // handleCategoryChange={handleCategoryChange}
+          />
+          <SecondaryButton
+            buttonname="Travel"
+            image={healthimage}
+            // handleCategoryChange={handleCategoryChange}
+          />
+          <SecondaryButton
+            buttonname="Health"
+            image={travelimage}
+            // handleCategoryChange={handleCategoryChange}
+          />
           <PrimaryButton
             buttonname="Add Budget"
             image={addimage}
