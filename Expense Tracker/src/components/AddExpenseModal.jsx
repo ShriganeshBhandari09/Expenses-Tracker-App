@@ -32,7 +32,6 @@ const AddExpenseModal = ({
   return (
     <>
       <div className="opacity" onClick={closePopUp}></div>
-
       <div className="add-expense-input-container">
         <span className="close-button" onClick={closePopUp}>
           &times;
