@@ -139,7 +139,9 @@ const ExpenseApp = () => {
     }
   };
 
-
+  const handleExpenseDeleteChange = (newExpenseData) =>{
+    setExpenseData(newExpenseData)
+  }
 
   // const handleCategoryChange = () => {
   //   const sortedExpenses = expenseData.filter((item) => {
@@ -206,7 +208,10 @@ const ExpenseApp = () => {
             handelModalChange={handleExpenseModalChange}
           />
         </div>
-        <ExpenseTable expenseData={expenseData}  />
+        <ExpenseTable
+          expenseData={expenseData}
+          handleExpenseDeleteChange={handleExpenseDeleteChange}
+        />
         {BudgetModalOpen && (
           <AddBudgetModal
             budget={budget}

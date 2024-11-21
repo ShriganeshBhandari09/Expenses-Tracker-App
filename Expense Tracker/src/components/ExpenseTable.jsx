@@ -1,8 +1,16 @@
 import deleteimage from "../assets/delete.svg";
 import editimage from "../assets/edit.svg";
 
-const ExpenseTable = ({expenseData}) => {
+const ExpenseTable = ({ expenseData, handleExpenseDeleteChange }) => {
   // const expenseData = props.expenseData;
+
+  const handleDeleteChange = (index) => {
+    const newExpenseData = [...expenseData];
+    newExpenseData.splice(index, 1);
+    console.log("Running");
+    handleExpenseDeleteChange(newExpenseData);
+  };
+
   return (
     <>
       {expenseData.length > 0 ? (
@@ -69,7 +77,13 @@ const ExpenseTable = ({expenseData}) => {
                           <img src={editimage} alt="" />
                           Edit
                         </button>
-                        <button type="button" className="table-button">
+                        <button
+                          type="button"
+                          className="table-button"
+                          onClick={() => {
+                            handleDeleteChange(index);
+                          }}
+                        >
                           <img src={deleteimage} alt="" />
                           Delete
                         </button>
