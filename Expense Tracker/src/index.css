@@ -173,7 +173,7 @@ button:focus-visible {
   width: 100%;
 }
 
-.something{
+.something {
   display: none;
 }
 
@@ -205,11 +205,17 @@ button:focus-visible {
   border: 1px solid black;
   width: 100%;
   position: relative;
+  overflow: scroll;
+  border-radius: 20px;
+}
+
+.expense-container::-webkit-scrollbar {
+  display: none;
 }
 
 /* .expense-container table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: collapse;  
   padding: 20px;
 }
 
@@ -248,7 +254,6 @@ table {
   border-collapse: collapse;
   width: 100%;
   position: relative;
-  z-index: -2;
 }
 
 td {
@@ -256,6 +261,10 @@ td {
   text-align: center;
   font-size: 22px;
   font-weight: 400;
+}
+
+tbody tr:hover{
+  background-color:#FAF9F6;
 }
 
 .table-header {

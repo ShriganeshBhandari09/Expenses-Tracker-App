@@ -1,8 +1,8 @@
 import deleteimage from "../assets/delete.svg";
 import editimage from "../assets/edit.svg";
 
-const ExpenseTable = (props) => {
-  const expenseData = props.expenseData;
+const ExpenseTable = ({expenseData}) => {
+  // const expenseData = props.expenseData;
   return (
     <>
       {expenseData.length > 0 ? (
@@ -58,7 +58,7 @@ const ExpenseTable = (props) => {
               {expenseData.map((item, index) => {
                 return (
                   <tr key={index}>
-                    <td>{item.id}</td>
+                    <td>{index + 1}</td>
                     <td>{item.date.split("-").reverse().join("-")}</td>
                     <td>{item.description}</td>
                     <td>{item.category}</td>

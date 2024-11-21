@@ -97,6 +97,7 @@ const ExpenseApp = () => {
   const [BudgetModalOpen, setBudgetModalOpen] = useState(false);
   const [ExpenseModalOpen, setExpenseModalOpen] = useState(false);
   // const [category, setcategory] = useState("");
+  const [search, setsearch] = useState("");
 
   const handleExpenseDataChange = (newExpesne) => {
     const newExpensedata = [...expenseData, newExpesne];
@@ -105,7 +106,7 @@ const ExpenseApp = () => {
 
   useEffect(() => {
     const calculateExpense = () => {
-      console.log(expenseData);
+      // console.log(expenseData);
       let result = expenseData.reduce((acc, item) => {
         return acc + item.amount;
       }, 0);
@@ -138,7 +139,7 @@ const ExpenseApp = () => {
     }
   };
 
-  console.log(budget);
+
 
   // const handleCategoryChange = () => {
   //   const sortedExpenses = expenseData.filter((item) => {
@@ -166,7 +167,13 @@ const ExpenseApp = () => {
         <div className="button-container">
           <div className="search-container">
             <img src={searchimage} alt="" />
-            <input type="text" placeholder="Search" />
+            <input
+              type="text"
+              placeholder="Search"
+              id="search"
+              value={search}
+              onChange={(e) => setsearch(e.target.value)}
+            />
           </div>
           <SecondaryButton
             buttonname="Food And Drinks"
@@ -199,7 +206,7 @@ const ExpenseApp = () => {
             handelModalChange={handleExpenseModalChange}
           />
         </div>
-        <ExpenseTable expenseData={expenseData} />
+        <ExpenseTable expenseData={expenseData}  />
         {BudgetModalOpen && (
           <AddBudgetModal
             budget={budget}
