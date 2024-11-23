@@ -3,7 +3,7 @@ const Budget = (props) => {
     <div className="budget-component">
       <div>
         <h2>{props.title}</h2>
-        <p>₹{props.budget}/m</p>
+        <p>₹{props.budget}</p>
       </div>
       <div>
         <img src={props.image} alt="" className="budget-component-img"/>

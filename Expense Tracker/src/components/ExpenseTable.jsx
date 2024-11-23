@@ -70,7 +70,7 @@ const ExpenseTable = ({ expenseData, handleExpenseDeleteChange }) => {
                     <td>{item.date.split("-").reverse().join("-")}</td>
                     <td>{item.description}</td>
                     <td>{item.category}</td>
-                    <td>{parseInt(item.amount).toLocaleString()}</td>
+                    <td>{parseFloat(item.amount).toLocaleString()}</td>
                     <td>
                       <div className="table-button-div">
                         <button type="button" className="table-button">

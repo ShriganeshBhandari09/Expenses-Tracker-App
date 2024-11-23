@@ -6,6 +6,7 @@ import ExpenseTable from "./ExpenseTable";
 
 import budgetimage from "../assets/budget.svg";
 import expenseimage from "../assets/expense.svg";
+// import expenses from "../assets/expenses.svg";
 import foodimage from "../assets/food.svg";
 import groceriesimage from "../assets/groceries.svg";
 import healthimage from "../assets/health.svg";
@@ -16,7 +17,7 @@ import PrimaryButton from "./common/PrimaryButton";
 import AddBudgetModal from "./AddBudgetModal";
 import AddExpenseModal from "./AddExpenseModal";
 
-/*const Data = [
+const Data = [
   {
     id: 1,
     date: "2024-11-01",
@@ -41,7 +42,7 @@ import AddExpenseModal from "./AddExpenseModal";
   {
     id: 4,
     date: "2024-11-04",
-    category: "Foods & Drinks",
+    category: "Food And Drinks",
     amount: 18.5,
     description: "Dinner at a local restaurant",
   },
@@ -69,7 +70,7 @@ import AddExpenseModal from "./AddExpenseModal";
   {
     id: 8,
     date: "2024-11-08",
-    category: "Foods & Drinks",
+    category: "Food And Drinks",
     amount: 12.0,
     description: "Morning coffee and pastry",
   },
@@ -83,19 +84,19 @@ import AddExpenseModal from "./AddExpenseModal";
   {
     id: 10,
     date: "2024-11-10",
-    category: "Foods & Drinks",
+    category: "Food And Drinks",
     amount: 8.5,
     description: "Evening snacks",
   },
-
-];*/
+];
 
 const ExpenseApp = () => {
   const [budget, setBudget] = useState(0);
   const [expense, setExpense] = useState(0);
-  const [expenseData, setExpenseData] = useState([]);
+  const [expenseData, setExpenseData] = useState(Data);
   const [BudgetModalOpen, setBudgetModalOpen] = useState(false);
   const [ExpenseModalOpen, setExpenseModalOpen] = useState(false);
+
   // const [category, setcategory] = useState("");
   const [search, setsearch] = useState("");
 
@@ -110,10 +111,15 @@ const ExpenseApp = () => {
       let result = expenseData.reduce((acc, item) => {
         return acc + item.amount;
       }, 0);
-      setExpense(parseInt(result).toLocaleString());
+      setExpense(parseFloat(result).toLocaleString());
     };
     calculateExpense();
   }, [expenseData]);
+
+  // const calculateRemainingBudget = (budget, expense) =>{
+  //   console.log(budget)
+  //   return parseFloat(budget - expense)
+  // }
 
   const handleBudgetChange = (newBudget) => {
     setBudget(parseInt(newBudget).toLocaleString());
@@ -139,16 +145,13 @@ const ExpenseApp = () => {
     }
   };
 
-  const handleExpenseDeleteChange = (newExpenseData) =>{
-    setExpenseData(newExpenseData)
-  }
+  const handleExpenseDeleteChange = (newExpenseData) => {
+    setExpenseData(newExpenseData);
+  };
 
-  // const handleCategoryChange = () => {
-  //   const sortedExpenses = expenseData.filter((item) => {
-  //     item.category === "Food And Drinks";
-  //   });
-  //   setExpenseData(sortedExpenses);
-  // };
+  const handleExpenseDataCategoryChange = (newExpenseData) => {
+    setExpenseData(newExpenseData);
+  };
 
   // const handleExpenseData = (newData) => {
   //   const newExpenseData = [...expenseData];
@@ -162,13 +165,18 @@ const ExpenseApp = () => {
       <div className="main-container">
         <h1 className="user-heading">Hello, Shriganesh</h1>
         <div className="budget-container">
-          <Budget title="Your Budget" budget={budget} image={budgetimage} />
+          <Budget
+            title="Your Budget"
+            budget={`${budget}/m`}
+            image={budgetimage}
+          />
           <Budget title="Total Expense" budget={expense} image={expenseimage} />
+          <Budget title="Remaining Budget" image={expenseimage} />
         </div>
-        {/* {budget < expense ? <div className="warning"><h2>Please manage expenses within the budget.</h2></div> : <div className="something"><h2>None</h2></div>} */}
+        {/* {budget < expense ? <div className="warning"><h2>Please manage expenses within the budget.</h2></div> : null} */}
         <div className="button-container">
           <div className="search-container">
-            <img src={searchimage} alt="" />
+            {searchimage ? <img src={searchimage} alt="" /> : null}
             <input
               type="text"
               placeholder="Search"
@@ -177,24 +185,39 @@ const ExpenseApp = () => {
               onChange={(e) => setsearch(e.target.value)}
             />
           </div>
+          {/* <SecondaryButton
+            buttonname="All Expenses"
+            image={expenses}
+            // expenseData={expenseData}
+            // handleExpenseDataCategoryChange = {handleExpenseDataCategoryChange}
+            // handleCategoryChange={handleCategoryChange}
+          /> */}
           <SecondaryButton
             buttonname="Food And Drinks"
             image={foodimage}
+            expenseData={expenseData}
+            handleExpenseDataCategoryChange={handleExpenseDataCategoryChange}
             // handleCategoryChange={handleCategoryChange}
           />
           <SecondaryButton
             buttonname="Groceries"
             image={groceriesimage}
+            expenseData={expenseData}
+            handleExpenseDataCategoryChange={handleExpenseDataCategoryChange}
             // handleCategoryChange={handleCategoryChange}
           />
           <SecondaryButton
             buttonname="Travel"
-            image={healthimage}
+            image={travelimage}
+            expenseData={expenseData}
+            handleExpenseDataCategoryChange={handleExpenseDataCategoryChange}
             // handleCategoryChange={handleCategoryChange}
           />
           <SecondaryButton
             buttonname="Health"
-            image={travelimage}
+            image={healthimage}
+            expenseData={expenseData}
+            handleExpenseDataCategoryChange={handleExpenseDataCategoryChange}
             // handleCategoryChange={handleCategoryChange}
           />
           <PrimaryButton

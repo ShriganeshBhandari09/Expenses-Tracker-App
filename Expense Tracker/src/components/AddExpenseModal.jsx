@@ -62,11 +62,11 @@ const AddExpenseModal = ({
         </div>
         <form onSubmit={handleSubmit}>
           <div className="add-expense-div">
-            <label htmlFor="expense-name">Enter Expense Name</label>
+            <label htmlFor="expense-name">Expense Name</label>
             <input
               type="text"
               name="expense-name"
-              placeholder="Enter Expense Name"
+              placeholder="Expense Name"
               id="expense-name"
               value={newExpense}
               onChange={(e) => setNewExpense(e.target.value)}
@@ -94,7 +94,7 @@ const AddExpenseModal = ({
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
-              <option value="">Please choose an category</option>
+              <option value="">Choose an category</option>
               <option value="Food And Drinks">Food And Drinks</option>
               <option value="Groceries">Groceries</option>
               <option value="Travel">Travel</option>
@@ -105,13 +105,14 @@ const AddExpenseModal = ({
             )}
           </div>
           <div className="add-expense-div">
-            <label htmlFor="amount">Enter Amount</label>
+            <label htmlFor="amount">Amount</label>
             <input
               type="number"
               name="amount"
               id="amount"
               placeholder="Enter Amount"
               value={newExpenseAmount}
+              min={0}
               onChange={(e) => setnewExpenseAmount(e.target.value)}
             />
             {errors.newExpenseAmount && (

@@ -46,12 +46,13 @@ const AddBudgetModal = ({
         </div>
         <form onSubmit={handleSubmit}>
           <div className="add-budget-div">
-            <label htmlFor="amount">Enter Amount</label>
+            <label htmlFor="amount">Amount</label>
             <input
               type="number"
               name="amount"
               id="amount"
-              placeholder="Enter Amount"
+              placeholder="Amount"
+              min={0}
               onChange={(e) => setInputBudget(e.target.value)}
             />
             {errors.inputBudget && (
