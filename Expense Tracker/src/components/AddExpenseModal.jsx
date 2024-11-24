@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const AddExpenseModal = ({
   handleExpenseData,
@@ -12,6 +12,16 @@ const AddExpenseModal = ({
   const [isOpen, setIsOpen] = useState(open);
   // const [id, setid] = useState(0);
   const [errors, setErrors] = useState({});
+
+  const getTodayDate = () => {
+    const d = new Date();
+    const date = d.getDate();
+    const month = d.getMonth() + 1;
+    const year = d.getFullYear();
+    setDate(`${year}-${month}-${date}`);
+  };
+
+  useEffect(() => getTodayDate());
 
   const validate = () => {
     const errors = {};
@@ -50,6 +60,7 @@ const AddExpenseModal = ({
   const closePopUp = () => {
     handleExpenseModalChange(setIsOpen(!isOpen));
   };
+
   return (
     <>
       <div className="opacity" onClick={closePopUp}></div>
@@ -81,6 +92,7 @@ const AddExpenseModal = ({
               type="date"
               name=""
               id="date"
+              max={date}
               value={date}
               onChange={(e) => setDate(e.target.value)}
             />
