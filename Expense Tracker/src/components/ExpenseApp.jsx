@@ -13,77 +13,77 @@ const Data = [
     id: 1,
     date: "2024-11-01",
     category: "Health",
-    amount: 50,
+    amount: 500,
     description: "Doctor's appointment fee",
   },
   {
     id: 2,
     date: "2024-11-02",
     category: "Groceries",
-    amount: 75,
+    amount: 750,
     description: "Weekly grocery shopping",
   },
   {
     id: 3,
     date: "2024-11-03",
     category: "Travel",
-    amount: 120,
+    amount: 1200,
     description: "Bus ticket for intercity travel",
   },
   {
     id: 4,
     date: "2024-11-04",
     category: "Food And Drinks",
-    amount: 18,
+    amount: 180,
     description: "Dinner at a local restaurant",
   },
   {
     id: 5,
     date: "2024-11-05",
     category: "Health",
-    amount: 35,
+    amount: 350,
     description: "Pharmacy purchase",
   },
   {
     id: 6,
     date: "2024-11-06",
     category: "Groceries",
-    amount: 91,
+    amount: 910,
     description: "Monthly household supplies",
   },
   {
     id: 7,
     date: "2024-11-07",
     category: "Travel",
-    amount: 300,
+    amount: 3000,
     description: "Flight booking",
   },
   {
     id: 8,
     date: "2024-11-08",
     category: "Food And Drinks",
-    amount: 12,
+    amount: 120,
     description: "Morning coffee and pastry",
   },
   {
     id: 9,
     date: "2024-11-09",
     category: "Health",
-    amount: 20,
+    amount: 200,
     description: "Yoga class",
   },
   {
     id: 10,
     date: "2024-11-10",
     category: "Food And Drinks",
-    amount: 9,
+    amount: 90,
     description: "Evening snacks",
   },
 ];
 
 const ExpenseApp = () => {
-  const [budget, setBudget] = useState(1000);
-  const [expense, setExpense] = useState(0);
+  const [budget, setBudget] = useState(40000);
+  const [expense, setExpense] = useState(null);
   const [expenseData, setExpenseData] = useState(Data);
   // const [BudgetModalOpen, setBudgetModalOpen] = useState(false);
   // const [ExpenseModalOpen, setExpenseModalOpen] = useState(false);

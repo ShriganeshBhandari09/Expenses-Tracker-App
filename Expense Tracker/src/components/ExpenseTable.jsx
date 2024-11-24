@@ -86,6 +86,10 @@ const ExpenseTable = ({
     setFilteredTransactions(sortedExpenses);
   };
 
+  const handleAllExpenses = () => {
+    setFilteredTransactions(expenseData)
+  }
+
   useEffect(() => {
     handleSearchInputChange(searchInput);
   }, [expenseData, searchInput]);
@@ -103,13 +107,7 @@ const ExpenseTable = ({
             onChange={(e) => setsearchInput(e.target.value)}
           />
         </div>
-        <SecondaryButton
-          buttonname="All Expenses"
-          image={expenses}
-          // expenseData={expenseData}
-          // handleExpenseDataCategoryChange = {handleExpenseDataCategoryChange}
-          // handleCategoryChange={handleCategoryChange}
-        />
+        <button className="secondary-btn" onClick={handleAllExpenses}><img src={expenses} alt="" />All Expenses</button>
         <SecondaryButton
           buttonname="Food And Drinks"
           image={foodimage}
@@ -205,7 +203,7 @@ const ExpenseTable = ({
                     {/* <td>{item.date.split("-").reverse().join("-")}</td> */}
                     <td>{item.description}</td>
                     <td>{item.category}</td>
-                    <td>{parseFloat(item.amount).toLocaleString()}</td>
+                    <td>₹{Number(item.amount).toLocaleString()}</td>
                     <td>
                       <div className="table-button-div">
                         <button type="button" className="table-button">
@@ -229,7 +227,7 @@ const ExpenseTable = ({
           </table>
         </div>
       ) : (
-        <h2 className="warning">Add Your Expenses!!</h2>
+        <h2 className="warning">No Expenses!!!</h2>
       )}
       {BudgetModalOpen && (
         <AddBudgetModal

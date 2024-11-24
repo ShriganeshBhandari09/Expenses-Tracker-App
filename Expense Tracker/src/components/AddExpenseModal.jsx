@@ -13,13 +13,14 @@ const AddExpenseModal = ({
   const [isOpen, setIsOpen] = useState(open);
   // const [id, setid] = useState(0);
   const [errors, setErrors] = useState({});
+  const [initialdate, setInitialdate] = useState("");
 
   const getTodayDate = () => {
     const d = new Date();
     const date = d.getDate();
     const month = d.getMonth() + 1;
     const year = d.getFullYear();
-    setDate(`${year}-${month}-${date}`);
+    setInitialdate(`${year}-${month}-${date}`);
   };
 
   useEffect(() => getTodayDate());
@@ -55,7 +56,7 @@ const AddExpenseModal = ({
         amount: parseInt(newExpenseAmount),
       });
       handleExpenseModalChange(setIsOpen(!isOpen));
-      addNotify()
+      addNotify();
     }
   };
 
@@ -94,7 +95,7 @@ const AddExpenseModal = ({
               type="date"
               name=""
               id="date"
-              max={date}
+              max={initialdate}
               value={date}
               onChange={(e) => setDate(e.target.value)}
             />
