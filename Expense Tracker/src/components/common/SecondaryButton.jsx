@@ -4,16 +4,15 @@ const SecondaryButton = ({
   expenseData,
   handleExpenseDataCategoryChange,
 }) => {
+  const filterData = [...expenseData]
   const handleCategoryChange = () => {
-    const sortedExpenses = expenseData.filter((item) => {
+    console.log(expenseData);
+    const sortedExpenses = filterData.filter((item) => {
       return item.category === buttonname;
-    });
-    const unSortedExpenses = expenseData.filter((item) => {
-      return item.category !== buttonname;
     });
     console.log(expenseData);
     console.log([...sortedExpenses]);
-    handleExpenseDataCategoryChange([...sortedExpenses, ...unSortedExpenses]);
+    handleExpenseDataCategoryChange([...sortedExpenses]);
   };
 
   return (

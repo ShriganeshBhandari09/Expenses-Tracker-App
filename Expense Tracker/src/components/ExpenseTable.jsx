@@ -1,15 +1,27 @@
+import { useState } from "react";
 import deleteimage from "../assets/delete.svg";
 import editimage from "../assets/edit.svg";
+import DeleteBudgetModal from "./DeleteBudgetModal";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ExpenseTable = ({ expenseData, handleExpenseDeleteChange }) => {
   // const expenseData = props.expenseData;
 
-  const handleDeleteChange = (index) => {
-    const newExpenseData = [...expenseData];
-    newExpenseData.splice(index, 1);
-    console.log("Running");
-    handleExpenseDeleteChange(newExpenseData);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
+  const handleDeleteModalChange = () => {
+    // setIsOpen(newOpen);
+    // console.log(BudgetModalOpen);
+    if (deleteModalOpen) {
+      setDeleteModalOpen(false);
+    } else {
+      setDeleteModalOpen(true);
+    }
   };
+
+  const delteNotify = () => toast.success("Deleted Succesfully");
 
   return (
     <>
@@ -80,9 +92,7 @@ const ExpenseTable = ({ expenseData, handleExpenseDeleteChange }) => {
                         <button
                           type="button"
                           className="table-button"
-                          onClick={() => {
-                            handleDeleteChange(index);
-                          }}
+                          onClick={handleDeleteModalChange}
                         >
                           <img src={deleteimage} alt="" />
                           Delete
@@ -98,6 +108,16 @@ const ExpenseTable = ({ expenseData, handleExpenseDeleteChange }) => {
       ) : (
         <h2 className="warning">Add Your Expenses!!</h2>
       )}
+      {deleteModalOpen && (
+        <DeleteBudgetModal
+          deleteModalOpen={deleteModalOpen}
+          handleDeleteModalChange={handleDeleteModalChange}
+          expenseData={expenseData}
+          handleExpenseDeleteChange={handleExpenseDeleteChange}
+          delteNotify={delteNotify}
+        />
+      )}
+      <ToastContainer position="top-center" />
     </>
   );
 };

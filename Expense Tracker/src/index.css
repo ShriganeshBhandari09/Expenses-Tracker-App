@@ -307,7 +307,7 @@ tbody tr:hover {
 }
 
 .add-budget-container,
-.add-expense-container {
+.add-expense-container, .delete-modal-container {
   background-color: white;
   position: fixed;
   top: 50%;
@@ -318,6 +318,18 @@ tbody tr:hover {
   flex-direction: column;
   gap: 10px;
   border-radius: 10px;
+}
+
+.delete-modal-container{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 20%;
+}
+
+.delete-modal-img-container{
+  margin: 0 auto;
 }
 
 .close-button {

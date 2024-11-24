@@ -91,14 +91,14 @@ const Data = [
 ];
 
 const ExpenseApp = () => {
-  const [budget, setBudget] = useState(0);
+  const [budget, setBudget] = useState(1000);
   const [expense, setExpense] = useState(0);
   const [expenseData, setExpenseData] = useState(Data);
   const [BudgetModalOpen, setBudgetModalOpen] = useState(false);
   const [ExpenseModalOpen, setExpenseModalOpen] = useState(false);
-
   // const [category, setcategory] = useState("");
-  const [search, setsearch] = useState("");
+  const [searchInput, setsearchInput] = useState("");
+  // const [filteredTransactions, setFilteredTransactions] = useState(expenseData);
 
   const handleExpenseDataChange = (newExpesne) => {
     const newExpensedata = [...expenseData, newExpesne];
@@ -111,7 +111,7 @@ const ExpenseApp = () => {
       let result = expenseData.reduce((acc, item) => {
         return acc + item.amount;
       }, 0);
-      setExpense(parseFloat(result).toLocaleString());
+      setExpense(result);
     };
     calculateExpense();
   }, [expenseData]);
@@ -122,7 +122,7 @@ const ExpenseApp = () => {
   // }
 
   const handleBudgetChange = (newBudget) => {
-    setBudget(parseInt(newBudget).toLocaleString());
+    setBudget(newBudget);
   };
 
   const handleBudgetModalChange = () => {
@@ -165,13 +165,13 @@ const ExpenseApp = () => {
       <div className="main-container">
         <h1 className="user-heading">Hello, Shriganesh</h1>
         <div className="budget-container">
-          <Budget
-            title="Your Budget"
-            budget={`${budget}/m`}
-            image={budgetimage}
-          />
+          <Budget title="Your Budget" budget={budget} image={budgetimage} />
           <Budget title="Total Expense" budget={expense} image={expenseimage} />
-          <Budget title="Remaining Budget" image={expenseimage} />
+          <Budget
+            title="Remaining Budget"
+            budget={budget - expense}
+            image={expenseimage}
+          />
         </div>
         {/* {budget < expense ? <div className="warning"><h2>Please manage expenses within the budget.</h2></div> : null} */}
         <div className="button-container">
@@ -181,8 +181,8 @@ const ExpenseApp = () => {
               type="text"
               placeholder="Search"
               id="search"
-              value={search}
-              onChange={(e) => setsearch(e.target.value)}
+              value={searchInput}
+              onChange={(e) => setsearchInput(e.target.value)}
             />
           </div>
           {/* <SecondaryButton
