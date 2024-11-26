@@ -3,11 +3,9 @@ import exclamation from "../assets/exclamation.png";
 
 import "react-toastify/dist/ReactToastify.css";
 const DeleteBudgetModal = ({
-  expenseData,
   handleDeleteModalChange,
   deleteModalOpen,
-  handleDeleteChange,
-  // delteNotify,
+  handleDelete,
 }) => {
   const [isOpen, setIsOpen] = useState(deleteModalOpen);
   const closePopUp = () => {
@@ -53,7 +51,7 @@ const DeleteBudgetModal = ({
           >
             <button
               className="primary-btn"
-              onClick={() => handleDeleteChange(expenseData.id)}
+              onClick={() => handleDelete()}
             >
               Delete
             </button>

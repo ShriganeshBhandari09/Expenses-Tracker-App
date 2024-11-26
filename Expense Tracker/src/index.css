@@ -92,6 +92,10 @@
   cursor: pointer;
 }
 
+.secondary-btn:focus{
+  background-color: antiquewhite;
+}
+
 .search-container {
   padding: 10px 20px;
   gap: 8px;

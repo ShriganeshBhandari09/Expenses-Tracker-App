@@ -101,6 +101,7 @@ const ExpensesApp = () => {
     const updatedTransactions = transactions.filter(
       (transaction) => transaction.id !== id
     );
+    console.log(id)
     setTransactions(updatedTransactions);
   };
 
@@ -186,6 +187,7 @@ const ExpensesApp = () => {
         )}
         {deleteModalOpen && (
           <DeleteBudgetModal
+            transactions={transactions}
             deleteModalOpen={deleteModalOpen}
             handleDeleteModalChange={handleDeleteModalChange}
             handleDelete={handleDelete}
