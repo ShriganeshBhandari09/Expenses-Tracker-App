@@ -1,7 +1,7 @@
-const Budget = ({ title, budget, image }) => {
+const ExpenseComponent = ({ title, budget, image }) => {
   return (
     <div className="budget-component">
-      <div>
+      <div className="budget-component-details">
         <h2>{title}</h2>
         <p>₹{Number(budget).toLocaleString()}</p>
       </div>
@@ -12,6 +12,6 @@ const Budget = ({ title, budget, image }) => {
   );
 };
 
-Budget.propTypes;
+ExpenseComponent.propTypes;
 
-export default Budget;
+export default ExpenseComponent;

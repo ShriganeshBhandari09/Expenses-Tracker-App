@@ -1,30 +1,31 @@
 import { useState } from "react";
 import exclamation from "../assets/exclamation.png";
 
-
-
 import "react-toastify/dist/ReactToastify.css";
 const DeleteBudgetModal = ({
   expenseData,
   handleDeleteModalChange,
   deleteModalOpen,
-  handleExpenseDeleteChange,
-  delteNotify
+  handleDeleteChange,
+  // delteNotify,
 }) => {
   const [isOpen, setIsOpen] = useState(deleteModalOpen);
-  console.log(isOpen);
   const closePopUp = () => {
     handleDeleteModalChange(setIsOpen(!isOpen));
   };
 
-  const handleDeleteChange = (index) => {
-    const newExpenseData = [...expenseData];
-    newExpenseData.splice(index, 1);
-    handleExpenseDeleteChange(newExpenseData);
-    handleDeleteModalChange(setIsOpen(!isOpen));
-    delteNotify()
-  };
-
+  // const handleDeleteChange = (id) => {
+  //   // const newExpenseData = [...expenseData];
+  //   // console.log(index.target.value)
+  //   // newExpenseData.splice(index, 1);
+  //   const deleteExpense = expenseData.filter((data) => {
+  //     return data.id !== id;
+  //   });
+  //   console.log(deleteExpense);
+  //   handleExpenseDeleteChange(deleteExpense);
+  //   handleDeleteModalChange(setIsOpen(!isOpen));
+  //   delteNotify();
+  // };
 
   return (
     <>
@@ -50,7 +51,10 @@ const DeleteBudgetModal = ({
           <div
             style={{ display: "flex", gap: "10px", justifyContent: "center" }}
           >
-            <button className="primary-btn" onClick={handleDeleteChange}>
+            <button
+              className="primary-btn"
+              onClick={() => handleDeleteChange(expenseData.id)}
+            >
               Delete
             </button>
             <button
@@ -66,7 +70,6 @@ const DeleteBudgetModal = ({
     </>
   );
 };
-
 
 DeleteBudgetModal.propTypes;
 

@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import Budget from "./common/Budget";
-import Navbar from "./Navbar";
-import ExpenseTable from "./ExpenseTable";
-
+import ExpenseComponent from "./common/ExpenseComponent";
 import budgetimage from "../assets/budget.svg";
 import expenseimage from "../assets/expense.svg";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import ExpenseTable from "./ExpenseTable";
+import AddBudgetModal from "./AddBudgetModal";
+import AddExpenseModal from "./AddExpenseModal";
+import DeleteBudgetModal from "./DeleteBudgetModal";
 
 const Data = [
   {
@@ -81,108 +80,120 @@ const Data = [
   },
 ];
 
-const ExpenseApp = () => {
+const ExpensesApp = () => {
   const [budget, setBudget] = useState(40000);
-  const [expense, setExpense] = useState(null);
-  const [expenseData, setExpenseData] = useState(Data);
-  // const [BudgetModalOpen, setBudgetModalOpen] = useState(false);
-  // const [ExpenseModalOpen, setExpenseModalOpen] = useState(false);
-  // const [category, setcategory] = useState("");
-  // const [searchInput, setsearchInput] = useState("");
-  // const [filteredTransactions, setFilteredTransactions] = useState(expenseData);
-
-  const handleExpenseDataChange = (newExpesne) => {
-    const newExpensedata = [...expenseData, newExpesne];
-    setExpenseData(newExpensedata);
-  };
-
-  useEffect(() => {
-    const calculateExpense = () => {
-      // console.log(expenseData);
-      let result = expenseData.reduce((acc, item) => {
-        return acc + item.amount;
-      }, 0);
-      setExpense(result);
-    };
-    calculateExpense();
-  }, [expenseData]);
-
-  // const calculateRemainingBudget = (budget, expense) =>{
-  //   console.log(budget)
-  //   return parseFloat(budget - expense)
-  // }
+  const [expense, setExpense] = useState(10000);
+  const [transactions, setTransactions] = useState(Data);
+  const [BudgetModalOpen, setBudgetModalOpen] = useState(false);
+  const [ExpenseModalOpen, setExpenseModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const handleBudgetChange = (newBudget) => {
     setBudget(newBudget);
   };
 
-  // const handleBudgetModalChange = () => {
-  //   // setIsOpen(newOpen);
-  //   // console.log(BudgetModalOpen);
-  //   if (BudgetModalOpen) {
-  //     setBudgetModalOpen(false);
-  //   } else {
-  //     setBudgetModalOpen(true);
-  //   }
-  // };
-
-  // const handleExpenseModalChange = () => {
-  //   // setIsOpen(newOpen);
-  //   // console.log(BudgetModalOpen);
-  //   if (ExpenseModalOpen) {
-  //     setExpenseModalOpen(false);
-  //   } else {
-  //     setExpenseModalOpen(true);
-  //   }
-  // };
-
-  const handleExpenseDeleteChange = (newExpenseData) => {
-    setExpenseData(newExpenseData);
+  const handleExpenseDataChange = (newExpesne) => {
+    const newExpensedata = [...transactions, newExpesne];
+    setTransactions(newExpensedata);
   };
 
-  // const handleExpenseDataCategoryChange = (newExpenseData) => {
-  //   setExpenseData(newExpenseData);
-  // };
+  const handleDelete = (id) => {
+    const updatedTransactions = transactions.filter(
+      (transaction) => transaction.id !== id
+    );
+    setTransactions(updatedTransactions);
+  };
 
-  // const handleExpenseData = (newData) => {
-  //   const newExpenseData = [...expenseData];
-  //   newExpenseData.push(newData);
-  //   setExpenseData(newExpenseData);
-  // };
+  const handleBudgetModalChange = () => {
+    if (BudgetModalOpen) {
+      setBudgetModalOpen(false);
+    } else {
+      setBudgetModalOpen(true);
+    }
+  };
 
-  const addBudgetNotify = () => toast.success("Added Budget Successfully");
-  const addExpenseNotify = () => toast.success("Added Expense Successfully");
-  const delteNotify = () => toast.success("Deleted Succesfully");
+  const handleExpenseModalChange = () => {
+    // setIsOpen(newOpen);
+    // console.log(BudgetModalOpen);
+    if (ExpenseModalOpen) {
+      setExpenseModalOpen(false);
+    } else {
+      setExpenseModalOpen(true);
+    }
+  };
+
+  const handleDeleteModalChange = () => {
+    if (deleteModalOpen) {
+      setDeleteModalOpen(false);
+    } else {
+      setDeleteModalOpen(true);
+    }
+  };
+
+  useEffect(() => {
+    const calculateExpense = () => {
+      const totalExpense = transactions.reduce((accumulator, transaction) => {
+        return accumulator + transaction.amount;
+      }, 0);
+      setExpense(totalExpense);
+    };
+    calculateExpense();
+  }, [transactions]);
 
   return (
     <>
-      <Navbar />
       <div className="main-container">
-        <h1 className="user-heading">Hello, Shriganesh</h1>
+        <h1 className="user-heading">Hello, Shriganesh Bhandari</h1>
         <div className="budget-container">
-          <Budget title="Your Budget" budget={budget} image={budgetimage} />
-          <Budget title="Total Expense" budget={expense} image={expenseimage} />
-          <Budget
-            title="Remaining Budget"
-            budget={budget - expense}
+          <ExpenseComponent
+            title={"Total Budget"}
+            budget={budget}
+            image={budgetimage}
+          />
+          <ExpenseComponent
+            title={"Total Expense"}
+            budget={expense}
             image={expenseimage}
           />
+          <ExpenseComponent
+            title={"Remaining Budget"}
+            budget={budget - expense}
+            image={budgetimage}
+          />
         </div>
-        {/* {budget < expense ? <div className="warning"><h2>Please manage expenses within the budget.</h2></div> : null} */}
         <ExpenseTable
-          expenseData={expenseData}
-          budget={budget}
-          handleBudgetChange={handleBudgetChange}
-          addBudgetNotify={addBudgetNotify}
-          handleExpenseDeleteChange={handleExpenseDeleteChange}
-          handleExpenseData={handleExpenseDataChange}
-          delteNotify={delteNotify}
-          addNotify={addExpenseNotify}
+          transactions={transactions}
+          handleDelete={handleDelete}
+          handleBudgetModalChange={handleBudgetModalChange}
+          handleExpenseModalChange={handleExpenseModalChange}
+          handleDeleteModalChange={handleDeleteModalChange}
         />
+        {BudgetModalOpen && (
+          <AddBudgetModal
+            budget={budget}
+            handleBudgetChange={handleBudgetChange}
+            open={BudgetModalOpen}
+            handleBudgetModalChange={handleBudgetModalChange}
+          />
+        )}
+        {ExpenseModalOpen && (
+          <AddExpenseModal
+            expenseData={transactions}
+            handleExpenseData={handleExpenseDataChange}
+            open={ExpenseModalOpen}
+            handleExpenseModalChange={handleExpenseModalChange}
+          />
+        )}
+        {deleteModalOpen && (
+          <DeleteBudgetModal
+            deleteModalOpen={deleteModalOpen}
+            handleDeleteModalChange={handleDeleteModalChange}
+            handleDelete={handleDelete}
+          />
+        )}
       </div>
-      <ToastContainer position="top-center" />
     </>
   );
 };
 
-export default ExpenseApp;
+export default ExpensesApp;

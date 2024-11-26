@@ -1,21 +1,9 @@
-const SecondaryButton = ({
-  image,
-  buttonname,
-  handleCategoryChange
-}) => {
-  // const filterData = [...expenseData]
-  // const handleCategoryChange = () => {
-  //   console.log(expenseData);
-  //   const sortedExpenses = filterData.filter((item) => {
-  //     return item.category === buttonname;
-  //   });
-  //   console.log(expenseData);
-  //   console.log([...sortedExpenses]);
-  //   handleExpenseDataCategoryChange([...sortedExpenses]);
-  // };
-
+const SecondaryButton = ({ image, buttonname, handleCategoryChange }) => {
   return (
-    <button className="secondary-btn" onClick={() => handleCategoryChange(buttonname)}>
+    <button
+      className="secondary-btn"
+      onClick={() => handleCategoryChange(buttonname)}
+    >
       {image ? <img src={image} alt="" /> : null}
       {buttonname}
     </button>
