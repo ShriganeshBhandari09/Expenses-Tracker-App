@@ -4,6 +4,7 @@ const AddExpenseModal = ({
   handleExpenseData,
   open,
   handleExpenseModalChange,
+  notification
 }) => {
   const [newExpense, setNewExpense] = useState("");
   const [category, setCategory] = useState("");
@@ -56,7 +57,7 @@ const AddExpenseModal = ({
         amount: Number(newExpenseAmount),
       });
       handleExpenseModalChange(setIsOpen(!isOpen));
-      // addNotify();
+      notification()
     }
   };
 

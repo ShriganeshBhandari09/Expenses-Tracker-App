@@ -6,6 +6,8 @@ import ExpenseTable from "./ExpenseTable";
 import AddBudgetModal from "./AddBudgetModal";
 import AddExpenseModal from "./AddExpenseModal";
 import DeleteBudgetModal from "./DeleteBudgetModal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Data = [
   {
@@ -133,11 +135,16 @@ const ExpensesApp = () => {
       )
     );
     setDeleteModalOpen(false);
+    deleteExpenseNotify();
   };
 
   const closeDeleteModal = () => {
     setDeleteModalOpen(false);
   };
+
+  const addBudgetNotify = () => toast.success("Added Budget Successfully");
+  const addExpenseNotify = () => toast.success("Added Expense Successfully");
+  const deleteExpenseNotify = () => toast.success("Deleted Succesfully");
 
   useEffect(() => {
     const calculateExpense = () => {
@@ -183,6 +190,7 @@ const ExpensesApp = () => {
             handleBudgetChange={handleBudgetChange}
             open={BudgetModalOpen}
             handleBudgetModalChange={handleBudgetModalChange}
+            notification={addBudgetNotify}
           />
         )}
         {ExpenseModalOpen && (
@@ -191,6 +199,7 @@ const ExpensesApp = () => {
             handleExpenseData={handleExpenseDataChange}
             open={ExpenseModalOpen}
             handleExpenseModalChange={handleExpenseModalChange}
+            notification={addExpenseNotify}
           />
         )}
         {deleteModalOpen && (
@@ -203,6 +212,7 @@ const ExpensesApp = () => {
           />
         )}
       </div>
+      <ToastContainer />
     </>
   );
 };

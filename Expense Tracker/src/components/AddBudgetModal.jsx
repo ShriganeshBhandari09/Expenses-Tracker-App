@@ -5,7 +5,7 @@ const AddBudgetModal = ({
   handleBudgetChange,
   open,
   handleBudgetModalChange,
-  // addNotify,
+  notification,
 }) => {
   const [inputBudget, setInputBudget] = useState(budget);
   const [isOpen, setIsOpen] = useState(open);
@@ -28,6 +28,7 @@ const AddBudgetModal = ({
       handleBudgetChange(inputBudget);
       handleBudgetModalChange(setIsOpen(!isOpen));
       setInputBudget("");
+      notification();
     }
   };
 
