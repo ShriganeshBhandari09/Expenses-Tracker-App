@@ -15,7 +15,8 @@ const ExpenseTable = ({
   transactions,
   handleBudgetModalChange,
   handleExpenseModalChange,
-  handleDeleteModalChange,
+  handleDeleteClick,
+  handleEditClick
 }) => {
   const [searchInput, setSearchInput] = useState("");
   const [filteredTransactions, setFilteredTransactions] =
@@ -128,14 +129,14 @@ const ExpenseTable = ({
                     <td>₹{Number(item.amount).toLocaleString()}</td>
                     <td>
                       <div className="table-button-div">
-                        <button type="button" className="table-button">
+                        <button type="button" className="table-button" onClick={()=> handleEditClick(item)}>
                           <img src={editimage} alt="" />
                           Edit
                         </button>
                         <button
                           type="button"
                           className="table-button"
-                          onClick={() => handleDeleteModalChange(item.id)}
+                          onClick={() => handleDeleteClick(item)}
                         >
                           <img src={deleteimage} alt="" />
                           Delete

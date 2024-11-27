@@ -1,17 +1,7 @@
-import { useState } from "react";
 import exclamation from "../assets/exclamation.png";
 
 import "react-toastify/dist/ReactToastify.css";
-const DeleteBudgetModal = ({
-  handleDeleteModalChange,
-  deleteModalOpen,
-  handleDelete,
-}) => {
-  const [isOpen, setIsOpen] = useState(deleteModalOpen);
-  const closePopUp = () => {
-    handleDeleteModalChange(setIsOpen(!isOpen));
-  };
-
+const DeleteBudgetModal = ({ onClose, onConfirm }) => {
   // const handleDeleteChange = (id) => {
   //   // const newExpenseData = [...expenseData];
   //   // console.log(index.target.value)
@@ -27,7 +17,7 @@ const DeleteBudgetModal = ({
 
   return (
     <>
-      <div className="opacity" onClick={closePopUp}></div>
+      <div className="opacity" onClick={() => onClose()}></div>
       <div className="delete-modal-container">
         <div className="delete-modal-img-container">
           <img
@@ -49,16 +39,13 @@ const DeleteBudgetModal = ({
           <div
             style={{ display: "flex", gap: "10px", justifyContent: "center" }}
           >
-            <button
-              className="primary-btn"
-              onClick={() => handleDelete()}
-            >
+            <button className="primary-btn" onClick={() => onConfirm()}>
               Delete
             </button>
             <button
               className="primary-btn"
               style={{ backgroundColor: "#ff2146" }}
-              onClick={closePopUp}
+              onClick={() => onClose()}
             >
               Cancel
             </button>

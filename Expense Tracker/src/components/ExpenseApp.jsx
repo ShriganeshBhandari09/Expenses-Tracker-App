@@ -87,6 +87,7 @@ const ExpensesApp = () => {
   const [BudgetModalOpen, setBudgetModalOpen] = useState(false);
   const [ExpenseModalOpen, setExpenseModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
 
   const handleBudgetChange = (newBudget) => {
     setBudget(newBudget);
@@ -95,14 +96,6 @@ const ExpensesApp = () => {
   const handleExpenseDataChange = (newExpesne) => {
     const newExpensedata = [...transactions, newExpesne];
     setTransactions(newExpensedata);
-  };
-
-  const handleDelete = (id) => {
-    const updatedTransactions = transactions.filter(
-      (transaction) => transaction.id !== id
-    );
-    console.log(id)
-    setTransactions(updatedTransactions);
   };
 
   const handleBudgetModalChange = () => {
@@ -123,12 +116,27 @@ const ExpensesApp = () => {
     }
   };
 
-  const handleDeleteModalChange = () => {
-    if (deleteModalOpen) {
-      setDeleteModalOpen(false);
-    } else {
-      setDeleteModalOpen(true);
-    }
+  const handleEditClick = (expense) => {
+    setSelectedTransaction(expense);
+    setExpenseModalOpen(true);
+  };
+
+  const handleDeleteClick = (expense) => {
+    setSelectedTransaction(expense);
+    setDeleteModalOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    setTransactions((prevTransactions) =>
+      prevTransactions.filter(
+        (expense) => expense.id !== selectedTransaction.id
+      )
+    );
+    setDeleteModalOpen(false);
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false);
   };
 
   useEffect(() => {
@@ -164,10 +172,10 @@ const ExpensesApp = () => {
         </div>
         <ExpenseTable
           transactions={transactions}
-          handleDelete={handleDelete}
           handleBudgetModalChange={handleBudgetModalChange}
           handleExpenseModalChange={handleExpenseModalChange}
-          handleDeleteModalChange={handleDeleteModalChange}
+          handleDeleteClick={handleDeleteClick}
+          handleEditClick={handleEditClick}
         />
         {BudgetModalOpen && (
           <AddBudgetModal
@@ -189,8 +197,9 @@ const ExpensesApp = () => {
           <DeleteBudgetModal
             transactions={transactions}
             deleteModalOpen={deleteModalOpen}
-            handleDeleteModalChange={handleDeleteModalChange}
-            handleDelete={handleDelete}
+            handleDeleteModalChange={handleDeleteClick}
+            onClose={closeDeleteModal}
+            onConfirm={handleConfirmDelete}
           />
         )}
       </div>
