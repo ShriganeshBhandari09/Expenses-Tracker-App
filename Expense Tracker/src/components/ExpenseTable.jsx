@@ -16,7 +16,7 @@ const ExpenseTable = ({
   handleBudgetModalChange,
   handleExpenseModalChange,
   handleDeleteClick,
-  handleEditClick
+  handleEditClick,
 }) => {
   const [searchInput, setSearchInput] = useState("");
   const [filteredTransactions, setFilteredTransactions] =
@@ -111,6 +111,7 @@ const ExpenseTable = ({
             <thead>
               <tr>
                 <th className="table-header">Sr.</th>
+                {/* <th className="table-header">Id</th> */}
                 {/* <th className="table-header">Date</th> */}
                 <th className="table-header">Expense</th>
                 {/* <th className="table-header">Category</th> */}
@@ -123,13 +124,18 @@ const ExpenseTable = ({
                 return (
                   <tr key={index} className="table-row">
                     <td>{index + 1}</td>
+                    {/* <td>{item.id}</td> */}
                     {/* <td>{item.date.split("-").reverse().join("-")}</td> */}
                     <td>{item.description}</td>
                     {/* <td>{item.category}</td> */}
                     <td>₹{Number(item.amount).toLocaleString()}</td>
                     <td>
                       <div className="table-button-div">
-                        <button type="button" className="table-button" onClick={()=> handleEditClick(item)}>
+                        <button
+                          type="button"
+                          className="table-button"
+                          onClick={() => handleEditClick(item)}
+                        >
                           <img src={editimage} alt="" />
                           Edit
                         </button>

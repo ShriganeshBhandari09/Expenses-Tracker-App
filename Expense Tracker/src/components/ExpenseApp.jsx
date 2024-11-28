@@ -8,8 +8,9 @@ import AddExpenseModal from "./AddExpenseModal";
 import DeleteBudgetModal from "./DeleteBudgetModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import EditExpenseModal from "./EditExpenseModal";
 
-const Data = [
+/*const Data = [
   {
     id: 1,
     date: "2024-11-01",
@@ -80,15 +81,17 @@ const Data = [
     amount: 90,
     description: "Evening snacks",
   },
-];
+];*/
 
 const ExpensesApp = () => {
-  const [budget, setBudget] = useState(40000);
-  const [expense, setExpense] = useState(10000);
-  const [transactions, setTransactions] = useState(Data);
+  const [budget, setBudget] = useState(null);
+  const [expense, setExpense] = useState(null);
+  const [transactions, setTransactions] = useState([]);
   const [BudgetModalOpen, setBudgetModalOpen] = useState(false);
   const [ExpenseModalOpen, setExpenseModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [EditExpenseModalOpen, setEditExpenseModalOpen] = useState(false);
+
   const [selectedTransaction, setSelectedTransaction] = useState(null);
 
   const handleBudgetChange = (newBudget) => {
@@ -120,7 +123,23 @@ const ExpensesApp = () => {
 
   const handleEditClick = (expense) => {
     setSelectedTransaction(expense);
-    setExpenseModalOpen(true);
+    setEditExpenseModalOpen(true);
+  };
+
+  const EditModalClose = () => {
+    setEditExpenseModalOpen(false);
+  };
+
+  const handleEditTransaction = (expense) => {
+    let editedTransaction = transactions.map((transaction) => {
+      if (transaction.id === selectedTransaction.id) {
+        return expense;
+      } else {
+        return transaction;
+      }
+    });
+    setTransactions(editedTransaction);
+    editExpenseNotify();
   };
 
   const handleDeleteClick = (expense) => {
@@ -144,6 +163,7 @@ const ExpensesApp = () => {
 
   const addBudgetNotify = () => toast.success("Added Budget Successfully");
   const addExpenseNotify = () => toast.success("Added Expense Successfully");
+  const editExpenseNotify = () => toast.success("Edited Expense Successfully");
   const deleteExpenseNotify = () => toast.success("Deleted Succesfully");
 
   useEffect(() => {
@@ -209,6 +229,13 @@ const ExpensesApp = () => {
             handleDeleteModalChange={handleDeleteClick}
             onClose={closeDeleteModal}
             onConfirm={handleConfirmDelete}
+          />
+        )}
+        {EditExpenseModalOpen && (
+          <EditExpenseModal
+            onClose={EditModalClose}
+            selectedTransaction={selectedTransaction}
+            handleEditTransaction={handleEditTransaction}
           />
         )}
       </div>

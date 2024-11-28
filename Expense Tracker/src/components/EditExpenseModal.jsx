@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 
-const AddExpenseModal = ({
-  handleExpenseData,
-  open,
-  handleExpenseModalChange,
-  notification,
+const EditExpenseModal = ({
+  onClose,
+  selectedTransaction,
+  handleEditTransaction,
 }) => {
-  const [newExpense, setNewExpense] = useState("");
-  const [category, setCategory] = useState("");
-  const [date, setDate] = useState("");
-  const [newExpenseAmount, setnewExpenseAmount] = useState("");
-  const [isOpen, setIsOpen] = useState(open);
-  // const [id, setid] = useState(0);
+  const [editTransaction, setEditedTransaction] = useState(
+    selectedTransaction.description
+  );
+  const [editDate, setEditedDate] = useState(selectedTransaction.date);
+  const [editCategory, setEditedCategory] = useState(
+    selectedTransaction.category
+  );
+  const [editAmount, setEditedAmount] = useState(selectedTransaction.amount);
+
   const [errors, setErrors] = useState({});
   const [initialdate, setInitialdate] = useState("");
 
@@ -28,16 +29,16 @@ const AddExpenseModal = ({
 
   const validate = () => {
     const errors = {};
-    if (!newExpense) {
+    if (!editTransaction) {
       errors.newExpense = "Please Enter Expense.";
     }
-    if (!category) {
+    if (!editCategory) {
       errors.category = "Please Select Category";
     }
-    if (!date) {
+    if (!editDate) {
       errors.date = "Please Select Date";
     }
-    if (!newExpenseAmount) {
+    if (!editAmount) {
       errors.newExpenseAmount = "Please Enter Amount";
     }
     setErrors(errors);
@@ -46,35 +47,31 @@ const AddExpenseModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validate()) {
-      handleExpenseData({
-        id: uuidv4(),
-        description: newExpense,
-        category: category,
-        date: date,
-        amount: Number(newExpenseAmount),
-      });
-      handleExpenseModalChange(setIsOpen(!isOpen));
-      console.log("Expense Name", newExpense);
-      console.log("Category", category);
-      console.log("Expense Amount", newExpenseAmount);
-      notification();
-    }
-  };
 
-  const closePopUp = () => {
-    handleExpenseModalChange(setIsOpen(!isOpen));
+    if (validate()) {
+      console.log("Expense Name", editTransaction);
+      console.log("Category", editCategory);
+      console.log("Expense Amount", editAmount);
+      handleEditTransaction({
+        id: selectedTransaction.id,
+        description: editTransaction,
+        category: editCategory,
+        date: editDate,
+        amount: Number(editAmount),
+      });
+      onClose();
+    }
   };
 
   return (
     <>
-      <div className="opacity" onClick={closePopUp}></div>
+      <div className="opacity" onClick={onClose}></div>
       <div className="add-expense-container">
-        <span className="close-button" onClick={closePopUp}>
+        <span className="close-button" onClick={onClose}>
           &times;
         </span>
         <div className="add-expense-header-container">
-          <h2 className="add-expense-heading">Add Expense</h2>
+          <h2 className="add-expense-heading">Edit Expense</h2>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="add-expense-div">
@@ -84,8 +81,8 @@ const AddExpenseModal = ({
               name="expense-name"
               placeholder="Expense Name"
               id="expense-name"
-              value={newExpense}
-              onChange={(e) => setNewExpense(e.target.value)}
+              value={editTransaction}
+              onChange={(e) => setEditedTransaction(e.target.value)}
             />
             {errors.newExpense && (
               <span style={{ color: "red" }}>{errors.newExpense}</span>
@@ -98,8 +95,8 @@ const AddExpenseModal = ({
               name=""
               id="date"
               max={initialdate}
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
+              value={editDate}
+              onChange={(e) => setEditedDate(e.target.value)}
             />
             {errors.date && <span style={{ color: "red" }}>{errors.date}</span>}
           </div>
@@ -108,8 +105,8 @@ const AddExpenseModal = ({
             <select
               name="options"
               id="options"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              value={editCategory}
+              onChange={(e) => setEditedCategory(e.target.value)}
             >
               <option value="">Choose an category</option>
               <option value="Food And Drinks">Food And Drinks</option>
@@ -128,21 +125,21 @@ const AddExpenseModal = ({
               name="amount"
               id="amount"
               placeholder="Enter Amount"
-              value={newExpenseAmount}
+              value={editAmount}
               min={0}
-              onChange={(e) => setnewExpenseAmount(e.target.value)}
+              onChange={(e) => setEditedAmount(e.target.value)}
             />
             {errors.newExpenseAmount && (
               <span style={{ color: "red" }}>{errors.newExpenseAmount}</span>
             )}
           </div>
-          <button className="primary-btn">Add Expense</button>
+          <button className="primary-btn">Edit Expense</button>
         </form>
       </div>
     </>
   );
 };
 
-AddExpenseModal.propTypes;
+EditExpenseModal.propTypes;
 
-export default AddExpenseModal;
+export default EditExpenseModal;
