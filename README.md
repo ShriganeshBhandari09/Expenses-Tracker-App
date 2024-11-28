@@ -24,8 +24,7 @@ An intuitive **ReactJS-based Expense Tracker** application to manage your financ
 
 ## 📸 Screenshots
 
-![Expense Tracker Screenshot 1](#)  
-*Overview of the application interface.*
+![Expense Tracker Screenshot 1](ScreenShots/Screenshot%202024-11-28%20155015.png)  
 
 ---
 
@@ -33,12 +32,12 @@ An intuitive **ReactJS-based Expense Tracker** application to manage your financ
 
 1. **Clone the Repository**  
    ```bash
-   git clone https://github.com/yourusername/expense-tracker.git
+   git clone https://github.com/ShriganeshBhandari09/Expenses-Tracker-App.git
    ```
 
 2. **Navigate to the Project Directory**
    ```bash
-   cd expense-tracker
+   cd Expense Tracker
    ```
 
 3. **Install Dependencies**
