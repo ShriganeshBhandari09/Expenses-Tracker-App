@@ -92,7 +92,7 @@
   cursor: pointer;
 }
 
-.secondary-btn:focus{
+.secondary-btn:focus {
   background-color: antiquewhite;
 }
 
@@ -235,6 +235,7 @@ tbody tr:hover {
   flex-direction: column;
   gap: 10px;
   border-radius: 10px;
+  width: 95%;
 }
 
 .delete-modal-container {
@@ -390,6 +391,22 @@ input::-webkit-inner-spin-button {
   /* tbody tr:hover{
     background-color: ;
   } */
+
+  .add-budget-container,
+  .add-expense-container,
+  .delete-modal-container {
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* transition: 2s; */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 10px;
+    width: initial;
+  }
 }
 
 @media (min-width: 1440px) {

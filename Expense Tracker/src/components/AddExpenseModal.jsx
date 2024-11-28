@@ -55,9 +55,9 @@ const AddExpenseModal = ({
         amount: Number(newExpenseAmount),
       });
       handleExpenseModalChange(setIsOpen(!isOpen));
-      console.log("Expense Name", newExpense);
-      console.log("Category", category);
-      console.log("Expense Amount", newExpenseAmount);
+      // console.log("Expense Name", newExpense);
+      // console.log("Category", category);
+      // console.log("Expense Amount", newExpenseAmount);
       notification();
     }
   };

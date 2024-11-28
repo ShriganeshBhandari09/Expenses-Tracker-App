@@ -49,9 +49,9 @@ const EditExpenseModal = ({
     e.preventDefault();
 
     if (validate()) {
-      console.log("Expense Name", editTransaction);
-      console.log("Category", editCategory);
-      console.log("Expense Amount", editAmount);
+      // console.log("Expense Name", editTransaction);
+      // console.log("Category", editCategory);
+      // console.log("Expense Amount", editAmount);
       handleEditTransaction({
         id: selectedTransaction.id,
         description: editTransaction,
