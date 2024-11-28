@@ -85,5 +85,5 @@ Contributions are welcome! If you'd like to add features or fix bugs:
 For queries or suggestions, please reach out at:  
 
 - **Shriganesh Bhandari**  
-- [Your Email Address](mailto:shriganesh.bhandari693@gmail.com)  
-- [Your LinkedIn Profile](https://linkedin.com/in/shriganeshbhandari)  
+- [Email](mailto:shriganesh.bhandari693@gmail.com)  
+- [LinkedIn](https://linkedin.com/in/shriganeshbhandari)  
