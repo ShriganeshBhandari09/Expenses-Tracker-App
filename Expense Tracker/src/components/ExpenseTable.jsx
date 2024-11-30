@@ -10,6 +10,7 @@ import foodimage from "../assets/food.svg";
 import groceriesimage from "../assets/groceries.svg";
 import expenses from "../assets/expenses.svg";
 import SecondaryButton from "./common/SecondaryButton";
+import ExpensesPieChart from "./ExpensesPieChart";
 
 const ExpenseTable = ({
   transactions,
@@ -106,55 +107,58 @@ const ExpenseTable = ({
         />
       </div>
       {filteredTransactions?.length > 0 ? (
-        <div className="expense-container">
-          <table>
-            <thead>
-              <tr>
-                <th className="table-header">Sr.</th>
-                {/* <th className="table-header">Id</th> */}
-                {/* <th className="table-header">Date</th> */}
-                <th className="table-header">Expense</th>
-                {/* <th className="table-header">Category</th> */}
-                <th className="table-header">Amount</th>
-                <th className="table-header">Edit / Delete</th>
-              </tr>
-            </thead>
-            <tbody className="table-data">
-              {filteredTransactions.map((item, index) => {
-                return (
-                  <tr key={index} className="table-row">
-                    <td>{index + 1}</td>
-                    {/* <td>{item.id}</td> */}
-                    {/* <td>{item.date.split("-").reverse().join("-")}</td> */}
-                    <td>{item.description}</td>
-                    {/* <td>{item.category}</td> */}
-                    <td>₹{Number(item.amount).toLocaleString()}</td>
-                    <td>
-                      <div className="table-button-div">
-                        <button
-                          type="button"
-                          className="table-button"
-                          onClick={() => handleEditClick(item)}
-                        >
-                          <img src={editimage} alt="" />
-                          Edit
-                        </button>
-                        <button
-                          type="button"
-                          className="table-button"
-                          onClick={() => handleDeleteClick(item)}
-                        >
-                          <img src={deleteimage} alt="" />
-                          Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        <>
+          <div className="expense-container">
+            <table>
+              <thead>
+                <tr>
+                  <th className="table-header">Sr.</th>
+                  {/* <th className="table-header">Id</th> */}
+                  {/* <th className="table-header">Date</th> */}
+                  <th className="table-header">Expense</th>
+                  {/* <th className="table-header">Category</th> */}
+                  <th className="table-header">Amount</th>
+                  <th className="table-header">Edit / Delete</th>
+                </tr>
+              </thead>
+              <tbody className="table-data">
+                {filteredTransactions.map((item, index) => {
+                  return (
+                    <tr key={index} className="table-row">
+                      <td>{index + 1}</td>
+                      {/* <td>{item.id}</td> */}
+                      {/* <td>{item.date.split("-").reverse().join("-")}</td> */}
+                      <td>{item.description}</td>
+                      {/* <td>{item.category}</td> */}
+                      <td>₹{Number(item.amount).toLocaleString()}</td>
+                      <td>
+                        <div className="table-button-div">
+                          <button
+                            type="button"
+                            className="table-button"
+                            onClick={() => handleEditClick(item)}
+                          >
+                            <img src={editimage} alt="" />
+                            Edit
+                          </button>
+                          <button
+                            type="button"
+                            className="table-button"
+                            onClick={() => handleDeleteClick(item)}
+                          >
+                            <img src={deleteimage} alt="" />
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <ExpensesPieChart transactions={filteredTransactions}/>
+        </>
       ) : (
         <h2 className="warning">No Expenses!!!</h2>
       )}

@@ -25,7 +25,7 @@ const EditExpenseModal = ({
     setInitialdate(`${year}-${month}-${date}`);
   };
 
-  useEffect(() => getTodayDate());
+  useEffect(() => getTodayDate(), []);
 
   const validate = () => {
     const errors = {};
