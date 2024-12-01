@@ -47,7 +47,7 @@ const ExpensesPieChart = ({ transactions }) => {
 
   const data1 = [
     { label: "Food And Drinks", value: foodTotalAmount, color: "#3c9d4e" },
-    { label: "Groceries", value: groceriesTotalAmount, olor: "#e4bf58" },
+    { label: "Groceries", value: groceriesTotalAmount, color: "#e4bf58" },
     { label: "Health", value: healthTotalAmount, color: "#7031ac" },
     { label: "Travel", value: travelTotalAmount, color: "#4174c9" },
   ];
@@ -66,22 +66,10 @@ const ExpensesPieChart = ({ transactions }) => {
   // ];
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column",
-        gap: "20px",
-        alignItems: "center",
-      }}
-    >
-      <h2>Expenses Chart</h2>
+    <Box>
       <PieChart
-        style={{ margin: "0 auto" }}
         series={[
           {
-            innerRadius: 0,
-            outerRadius: 200,
             data: data1,
           },
           // {
@@ -90,11 +78,13 @@ const ExpensesPieChart = ({ transactions }) => {
           //   data: data2,
           // },
         ]}
-        width={1000}
-        height={600}
+        width={800}
+        height={400}
       />
     </Box>
   );
 };
+
+ExpensesPieChart.propTypes;
 
 export default ExpensesPieChart;

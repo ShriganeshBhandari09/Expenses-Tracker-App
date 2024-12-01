@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EditExpenseModal from "./EditExpenseModal";
 
-const Data = [
+const expensesData = [
   {
     id: 1,
     date: "2024-11-01",
@@ -84,9 +84,9 @@ const Data = [
 ];
 
 const ExpensesApp = () => {
-  const [budget, setBudget] = useState(null);
+  const [budget, setBudget] = useState(40000);
   const [expense, setExpense] = useState(null);
-  const [transactions, setTransactions] = useState(Data);
+  const [transactions, setTransactions] = useState(expensesData);
   const [BudgetModalOpen, setBudgetModalOpen] = useState(false);
   const [ExpenseModalOpen, setExpenseModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -198,6 +198,7 @@ const ExpensesApp = () => {
           />
         </div>
         <ExpenseTable
+          budget={budget}
           transactions={transactions}
           handleBudgetModalChange={handleBudgetModalChange}
           handleExpenseModalChange={handleExpenseModalChange}

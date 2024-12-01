@@ -18,13 +18,14 @@ const AddExpenseModal = ({
 
   const getTodayDate = () => {
     const d = new Date();
-    const date = d.getDate();
+    const date = d.getDate() < 9 ? "0" + d.getDate() : d.getDate();
     const month = d.getMonth() + 1;
     const year = d.getFullYear();
     setInitialdate(`${year}-${month}-${date}`);
+    console.log(initialdate);
   };
 
-  useEffect(() => getTodayDate(), []);
+  useEffect(() => getTodayDate());
 
   const validate = () => {
     const errors = {};
