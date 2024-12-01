@@ -1,8 +1,14 @@
-const SecondaryButton = ({ image, buttonname, handleCategoryChange }) => {
+const SecondaryButton = ({
+  image,
+  buttonname,
+  handleCategoryChange,
+  activeButton,
+  index,
+}) => {
   return (
     <button
-      className="secondary-btn"
-      onClick={() => handleCategoryChange(buttonname)}
+      className={`secondary-btn ${activeButton === index ? "active" : ""}`}
+      onClick={() => handleCategoryChange(buttonname, index)}
     >
       {image ? <img src={image} alt="" /> : null}
       {buttonname}

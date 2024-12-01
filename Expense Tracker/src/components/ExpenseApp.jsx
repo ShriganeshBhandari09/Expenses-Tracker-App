@@ -198,7 +198,6 @@ const ExpensesApp = () => {
           />
         </div>
         <ExpenseTable
-          budget={budget}
           transactions={transactions}
           handleBudgetModalChange={handleBudgetModalChange}
           handleExpenseModalChange={handleExpenseModalChange}

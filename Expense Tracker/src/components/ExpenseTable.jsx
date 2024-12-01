@@ -14,7 +14,6 @@ import ExpensesPieChart from "./ExpensesPieChart";
 import ExpenseLineChart from "./ExpenseLineChart";
 
 const ExpenseTable = ({
-  budget,
   transactions,
   handleBudgetModalChange,
   handleExpenseModalChange,
@@ -24,7 +23,10 @@ const ExpenseTable = ({
   const [searchInput, setSearchInput] = useState("");
   const [filteredTransactions, setFilteredTransactions] =
     useState(transactions);
-  const handleCategoryChange = (buttonname) => {
+
+  const [activeButton, setActiveButton] = useState(null);
+  const handleCategoryChange = (buttonname, index) => {
+    setActiveButton(index);
     const expensesData = [...transactions];
     const sortedExpenses = expensesData.filter((item) => {
       return item.category === buttonname;
@@ -81,21 +83,29 @@ const ExpenseTable = ({
           buttonname="Food And Drinks"
           image={foodimage}
           handleCategoryChange={handleCategoryChange}
+          index={0}
+          activeButton={activeButton}
         />
         <SecondaryButton
           buttonname="Groceries"
           image={groceriesimage}
           handleCategoryChange={handleCategoryChange}
+          index={1}
+          activeButton={activeButton}
         />
         <SecondaryButton
           buttonname="Travel"
           image={travelimage}
           handleCategoryChange={handleCategoryChange}
+          index={2}
+          activeButton={activeButton}
         />
         <SecondaryButton
           buttonname="Health"
           image={healthimage}
           handleCategoryChange={handleCategoryChange}
+          index={3}
+          activeButton={activeButton}
         />
         <PrimaryButton
           buttonname="Add Budget"
@@ -111,7 +121,7 @@ const ExpenseTable = ({
       {filteredTransactions?.length > 0 ? (
         <>
           <div style={{ display: "flex" }}>
-            <ExpensesPieChart transactions={transactions} budget={budget} />
+            <ExpensesPieChart transactions={transactions} />
             <ExpenseLineChart transactions={transactions} />
           </div>
           <div className="expense-container">

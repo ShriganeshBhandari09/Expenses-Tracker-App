@@ -94,10 +94,15 @@
   line-height: 18.4px;
   cursor: pointer;
 }
-
-/* .secondary-btn:focus {
+/* 
+.secondary-btn:focus {
   background-color: antiquewhite;
 } */
+
+
+.secondary-btn.active {
+  background-color: #a6adf5;
+}
 
 .search-container {
   padding: 10px 20px;
