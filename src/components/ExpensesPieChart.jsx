@@ -1,6 +1,5 @@
 import { PieChart } from "@mui/x-charts/PieChart";
 import { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
 
 const ExpensesPieChart = ({ transactions }) => {
   const [filteredTransactions, setFilteredTransactions] =
@@ -66,22 +65,15 @@ const ExpensesPieChart = ({ transactions }) => {
   // ];
 
   return (
-    <Box>
       <PieChart
         series={[
           {
             data: data1,
           },
-          // {
-          //   innerRadius: 220,
-          //   outerRadius: 250,
-          //   data: data2,
-          // },
         ]}
         width={800}
         height={400}
       />
-    </Box>
   );
 };
 
