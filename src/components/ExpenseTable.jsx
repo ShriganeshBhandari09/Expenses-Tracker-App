@@ -130,7 +130,7 @@ const ExpenseTable = ({
                 <tr>
                   <th className="table-header">Sr.</th>
                   {/* <th className="table-header">Id</th> */}
-                  <th className="table-header">Date</th>
+                  {/* <th className="table-header">Date</th> */}
                   <th className="table-header">Expense</th>
                   {/* <th className="table-header">Category</th> */}
                   <th className="table-header">Amount</th>
@@ -143,7 +143,7 @@ const ExpenseTable = ({
                     <tr key={index} className="table-row">
                       <td>{index + 1}</td>
                       {/* <td>{item.id}</td> */}
-                      <td>{item.date.split("-").reverse().join("-")}</td>
+                      {/* <td>{item.date.split("-").reverse().join("-")}</td> */}
                       <td>{item.description}</td>
                       {/* <td>{item.category}</td> */}
                       <td>₹{Number(item.amount).toLocaleString()}</td>
