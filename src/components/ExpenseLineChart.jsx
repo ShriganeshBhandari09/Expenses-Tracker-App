@@ -30,6 +30,16 @@ export default function ExpenseLineChart({ transactions }) {
         name: "Expense",
         data: expensesAmountData,
         type: "line",
+        areaStyle: {
+          color: "#F3BD001A",
+        },
+        // lineStyle: {
+        //   normal: {
+        //     color: "#707DFF",
+        //     width: 4,
+        //     type: "dotted",
+        //   },
+        // },
       },
     ],
   };
