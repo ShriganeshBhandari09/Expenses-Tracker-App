@@ -4,7 +4,7 @@ const Footer = () => {
       style={{
         width: "100%",
         textAlign: "center",
-        fontSize: "20px",
+        fontSize: "22px",
         padding: "20px 0px 20px 0px",
         fontFamily: "Satisfy",
         boxShadow: "0px 8px 32px 0px #1C1C1E1A",
@@ -13,14 +13,14 @@ const Footer = () => {
         borderRadius: "40px 40px 0px 0px",
       }}
     >
-      Built by &nbsp;
+      Made with <span style={{ color: "#e25555" }}>❤</span> by <span></span>
       <a
         href="https://github.com/ShriganeshBhandari09"
         style={{ fontFamily: "Satisfy" }}
       >
         Shriganesh Bhandari
-      </a>{" "}
-      | © 2024
+      </a>
+      {/* <span style={{ fontFamily: "Satisfy" }}> © 2024</span> */}
     </div>
   );
 };
