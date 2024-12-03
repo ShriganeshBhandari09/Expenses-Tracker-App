@@ -1,5 +1,5 @@
-import { PieChart } from "@mui/x-charts/PieChart";
 import { useEffect, useState } from "react";
+import ReactECharts from "echarts-for-react";
 
 const ExpensesPieChart = ({ transactions }) => {
   const [filteredTransactions, setFilteredTransactions] =
@@ -51,29 +51,75 @@ const ExpensesPieChart = ({ transactions }) => {
     { label: "Travel", value: travelTotalAmount, color: "#4174c9" },
   ];
 
-  // const data2 = [
-  //   { label: "Budget", value: budget },
-  //   {
-  //     label: "Remaining Budget",
-  //     value:
-  //       budget -
-  //       (foodTotalAmount +
-  //         groceriesTotalAmount +
-  //         healthTotalAmount +
-  //         travelTotalAmount),
-  //   },
-  // ];
+  // // const data2 = [
+  // //   { label: "Budget", value: budget },
+  // //   {
+  // //     label: "Remaining Budget",
+  // //     value:
+  // //       budget -
+  // //       (foodTotalAmount +
+  // //         groceriesTotalAmount +
+  // //         healthTotalAmount +
+  // //         travelTotalAmount),
+  // //   },
+  // // ];
+
+  // return (
+  //   <PieChart
+  //     series={[
+  //       {
+  //         data: data1,
+  //       },
+  //     ]}
+  //     // width={800}
+  //     // height={400}
+  //   />
+  // );
+
+  const option = {
+    title: {
+      text: "Expenses Chart",
+      left: "center",
+    },
+    tooltip: {
+      trigger: "item",
+      formatter: "{a} <br/>{b}: {c} ({d}%)",
+    },
+    legend: {
+      orient: "vertical",
+      left: "left",
+      data: data1.map((item) => item.label),
+    },
+    series: [
+      {
+        name: "Expense",
+        type: "pie",
+        radius: "60%",
+        center: ["50%", "50%"],
+        data: data1.map((item) => ({
+          value: item.value || 0,
+          name: item.label,
+          itemStyle: { color: item.color },
+        })),
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.5)",
+          },
+        },
+      },
+    ],
+  };
 
   return (
-      <PieChart
-        series={[
-          {
-            data: data1,
-          },
-        ]}
-        width={800}
-        height={400}
+    <div style={{ width: "100%", height: "500px" }}>
+      <ReactECharts
+        option={option}
+        style={{ width: "100%", height: "100%" }}
+        opts={{ renderer: "canvas" }} // Optional: to use canvas for rendering (better performance in many cases)
       />
+    </div>
   );
 };
 

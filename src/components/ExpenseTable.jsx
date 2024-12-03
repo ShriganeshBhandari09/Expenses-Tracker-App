@@ -120,9 +120,15 @@ const ExpenseTable = ({
       </div>
       {filteredTransactions?.length > 0 ? (
         <>
-          <div className="graphs-container" style={{ display: "flex" }}>
-            <ExpensesPieChart className="graph-container-content" transactions={transactions} />
-            <ExpenseLineChart className="graph-container-content" transactions={transactions} />
+          <div className="graphs-container">
+            <ExpensesPieChart
+              className="graph-container-content"
+              transactions={transactions}
+            />
+            <ExpenseLineChart
+              className="graph-container-content"
+              transactions={transactions}
+            />
           </div>
           <div className="expense-container">
             <table>
