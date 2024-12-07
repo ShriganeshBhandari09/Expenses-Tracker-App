@@ -62,6 +62,15 @@ const ExpenseTable = ({
     setFilteredTransactions(transactions);
   }, [transactions]);
 
+  // useEffect(() => {
+  //   const sortedTransactions = transactions.sort(function (a, b) {
+  //     let date1 = new Date(a.date);
+  //     let date2 = new Date(b.date);
+  //     return date1 - date2;
+  //   });
+  //   console.log(sortedTransactions);
+  //   setFilteredTransactions(sortedTransactions);
+  // }, [transactions]);
   return (
     <>
       <div className="button-container">

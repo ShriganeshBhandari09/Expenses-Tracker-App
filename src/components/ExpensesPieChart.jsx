@@ -45,11 +45,13 @@ const ExpensesPieChart = ({ transactions }) => {
   }, [filteredTransactions]);
 
   const data1 = [
-    { label: "Food And Drinks", value: foodTotalAmount, color: "#3c9d4e" },
-    { label: "Groceries", value: groceriesTotalAmount, color: "#e4bf58" },
-    { label: "Health", value: healthTotalAmount, color: "#7031ac" },
-    { label: "Travel", value: travelTotalAmount, color: "#4174c9" },
+    { label: "Food And Drinks", value: foodTotalAmount},
+    { label: "Groceries", value: groceriesTotalAmount},
+    { label: "Health", value: healthTotalAmount },
+    { label: "Travel", value: travelTotalAmount, color:"#73c0de" },
   ];
+
+  
 
   // // const data2 = [
   // //   { label: "Budget", value: budget },
@@ -96,6 +98,11 @@ const ExpensesPieChart = ({ transactions }) => {
         type: "pie",
         radius: "60%",
         center: ["50%", "50%"],
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: '#fff',
+          borderWidth: 2
+        },
         data: data1.map((item) => ({
           value: item.value || 0,
           name: item.label,

@@ -326,6 +326,10 @@ input::-webkit-inner-spin-button {
   flex-direction: column;
 }
 
+.graph-container-content {
+  flex-grow: 1;
+}
+
 @media (min-width: 768px) {
   .navbar h1 {
     font-size: 24px;
@@ -415,12 +419,13 @@ input::-webkit-inner-spin-button {
     width: initial;
   }
 
-  .graphs-container {
-    flex-direction: row;
-  }
 }
 
 @media (min-width: 1440px) {
+
+  .graphs-container {
+    flex-direction: row;
+  }
   .budget-container {
     flex-direction: row;
   }

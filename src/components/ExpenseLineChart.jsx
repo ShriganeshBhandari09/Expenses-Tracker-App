@@ -1,10 +1,20 @@
 import ReactECharts from "echarts-for-react";
+import { useEffect, useState } from "react";
 
 export default function ExpenseLineChart({ transactions }) {
-  const expensesAmountData = transactions.map(
-    (transaction) => transaction.amount
-  );
-  const xLabels = transactions.map((transaction) =>
+  const [expenses, setExpenses] = useState(transactions);
+
+  useEffect(() => {
+    const sortedTransactions = expenses.sort(function (a, b) {
+      let date1 = new Date(a.date);
+      let date2 = new Date(b.date);
+      return date1 - date2;
+    });
+    setExpenses(sortedTransactions);
+  }, [expenses]);
+
+  const expensesAmountData = expenses.map((transaction) => transaction.amount);
+  const xLabels = expenses.map((transaction) =>
     transaction.date.split("-").reverse().join("-")
   );
 
