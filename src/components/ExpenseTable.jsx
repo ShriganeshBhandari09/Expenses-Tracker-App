@@ -24,7 +24,7 @@ const ExpenseTable = ({
   const [filteredTransactions, setFilteredTransactions] =
     useState(transactions);
 
-  const [activeButton, setActiveButton] = useState(null);
+  const [activeButton, setActiveButton] = useState(0);
   const handleCategoryChange = (buttonname, index) => {
     setActiveButton(index);
     const expensesData = [...transactions];
@@ -34,7 +34,8 @@ const ExpenseTable = ({
     setFilteredTransactions(sortedExpenses);
   };
 
-  const handleAllExpenses = () => {
+  const handleAllExpenses = (buttonname,index) => {
+    setActiveButton(index);
     setFilteredTransactions(transactions);
   };
 
@@ -84,36 +85,39 @@ const ExpenseTable = ({
             onChange={(e) => setSearchInput(e.target.value)}
           />
         </div>
-        <button className="secondary-btn" onClick={handleAllExpenses}>
-          <img src={expenses} alt="" />
-          All Expenses
-        </button>
+        <SecondaryButton
+          buttonname="All Expenses"
+          image={expenses}
+          handleCategoryChange={handleAllExpenses}
+          index={0}
+          activeButton={activeButton}
+        />
         <SecondaryButton
           buttonname="Food And Drinks"
           image={foodimage}
           handleCategoryChange={handleCategoryChange}
-          index={0}
+          index={1}
           activeButton={activeButton}
         />
         <SecondaryButton
           buttonname="Groceries"
           image={groceriesimage}
           handleCategoryChange={handleCategoryChange}
-          index={1}
+          index={2}
           activeButton={activeButton}
         />
         <SecondaryButton
           buttonname="Travel"
           image={travelimage}
           handleCategoryChange={handleCategoryChange}
-          index={2}
+          index={3}
           activeButton={activeButton}
         />
         <SecondaryButton
           buttonname="Health"
           image={healthimage}
           handleCategoryChange={handleCategoryChange}
-          index={3}
+          index={4}
           activeButton={activeButton}
         />
         <PrimaryButton
@@ -132,11 +136,11 @@ const ExpenseTable = ({
           <div className="graphs-container">
             <ExpensesPieChart
               className="graph-container-content"
-              transactions={transactions}
+              transactions={filteredTransactions}
             />
             <ExpenseLineChart
               className="graph-container-content"
-              transactions={transactions}
+              transactions={filteredTransactions}
             />
           </div>
           <div className="expense-container">

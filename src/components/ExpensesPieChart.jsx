@@ -45,13 +45,11 @@ const ExpensesPieChart = ({ transactions }) => {
   }, [filteredTransactions]);
 
   const data1 = [
-    { label: "Food And Drinks", value: foodTotalAmount},
-    { label: "Groceries", value: groceriesTotalAmount},
+    { label: "Food And Drinks", value: foodTotalAmount },
+    { label: "Groceries", value: groceriesTotalAmount },
     { label: "Health", value: healthTotalAmount },
-    { label: "Travel", value: travelTotalAmount, color:"#73c0de" },
+    { label: "Travel", value: travelTotalAmount, color: "#73c0de" },
   ];
-
-  
 
   // // const data2 = [
   // //   { label: "Budget", value: budget },
@@ -92,29 +90,57 @@ const ExpensesPieChart = ({ transactions }) => {
       left: "left",
       data: data1.map((item) => item.label),
     },
+    // series: [
+    //   {
+    //     name: "Expense",
+    //     type: "pie",
+    //     radius: "60%",
+    //     center: ["50%", "50%"],
+    //     itemStyle: {
+    //       borderRadius: 10,
+    //       borderColor: '#fff',
+    //       borderWidth: 2
+    //     },
+    //     data: data1.map((item) => ({
+    //       value: item.value,
+    //       name: item.label,
+    //       itemStyle: { color: item.color },
+    //     })),
+    //     emphasis: {
+    //       itemStyle: {
+    //         shadowBlur: 10,
+    //         shadowOffsetX: 0,
+    //         shadowColor: "rgba(0, 0, 0, 0.5)",
+    //       },
+    //     },
+    //   },
+    // ],
     series: [
       {
         name: "Expense",
         type: "pie",
-        radius: "60%",
-        center: ["50%", "50%"],
+        radius: ["50%"],
+        avoidLabelOverlap: false,
         itemStyle: {
           borderRadius: 10,
-          borderColor: '#fff',
-          borderWidth: 2
+          borderColor: "#fff",
+          borderWidth: 2,
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 40,
+            fontWeight: "bold",
+          },
+        },
+        labelLine: {
+          show: false,
         },
         data: data1.map((item) => ({
-          value: item.value || 0,
+          value: item.value,
           name: item.label,
           itemStyle: { color: item.color },
         })),
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: "rgba(0, 0, 0, 0.5)",
-          },
-        },
       },
     ],
   };

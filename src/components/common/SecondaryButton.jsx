@@ -15,6 +15,7 @@ const SecondaryButton = ({
     </button>
   );
 };
+
 SecondaryButton.propTypes;
 
 export default SecondaryButton;

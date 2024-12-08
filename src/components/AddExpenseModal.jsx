@@ -22,10 +22,9 @@ const AddExpenseModal = ({
     const month = d.getMonth() + 1;
     const year = d.getFullYear();
     setInitialdate(`${year}-${month}-${date}`);
-    console.log(initialdate);
   };
 
-  useEffect(() => getTodayDate());
+  useEffect(() => getTodayDate(), []);
 
   const validate = () => {
     const errors = {};

@@ -10,73 +10,73 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EditExpenseModal from "./EditExpenseModal";
 
-const expensesData = [
+ const expensesData = [
   {
-    id: 21,
-    date: "2024-11-17",
+    id: 1,
+    date: "2024-01-15",
     category: "Travel",
     amount: 2200,
     description: "Flight booking for international travel",
   },
   {
-    id: 22,
-    date: "2024-11-18",
+    id: 2,
+    date: "2024-02-18",
     category: "Food And Drinks",
     amount: 250,
     description: "Dinner at a restaurant",
   },
   {
-    id: 23,
-    date: "2024-11-19",
+    id: 3,
+    date: "2024-03-05",
     category: "Health",
     amount: 300,
     description: "Check-up for health insurance",
   },
   {
-    id: 24,
-    date: "2024-11-20",
+    id: 4,
+    date: "2024-04-12",
     category: "Groceries",
     amount: 810,
     description: "Grocery run for snacks and drinks",
   },
   {
-    id: 25,
-    date: "2024-11-21",
+    id: 5,
+    date: "2024-05-20",
     category: "Travel",
     amount: 2500,
     description: "Booking for a business trip",
   },
   {
-    id: 26,
-    date: "2024-11-22",
+    id: 6,
+    date: "2024-06-10",
     category: "Food And Drinks",
     amount: 170,
     description: "Lunch at a food court",
   },
   {
-    id: 27,
-    date: "2024-11-23",
+    id: 7,
+    date: "2024-07-01",
     category: "Health",
     amount: 400,
     description: "Vitamins and supplements purchase",
   },
   {
-    id: 28,
-    date: "2024-11-24",
+    id: 8,
+    date: "2024-08-14",
     category: "Groceries",
     amount: 1050,
     description: "Groceries for the month",
   },
   {
-    id: 29,
-    date: "2024-11-25",
+    id: 9,
+    date: "2024-09-18",
     category: "Travel",
     amount: 2900,
     description: "Luxury vacation booking",
   },
   {
-    id: 30,
-    date: "2024-11-26",
+    id: 10,
+    date: "2024-10-05",
     category: "Food And Drinks",
     amount: 200,
     description: "Weekend brunch with friends",
@@ -112,8 +112,6 @@ const ExpensesApp = () => {
   };
 
   const handleExpenseModalChange = () => {
-    // setIsOpen(newOpen);
-    // console.log(BudgetModalOpen);
     if (ExpenseModalOpen) {
       setExpenseModalOpen(false);
     } else {
