@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ExpenseComponent from "./common/ExpenseComponent";
 import budgetimage from "../assets/budget.svg";
 import expenseimage from "../assets/expense.svg";
+import coinstack from "../assets/coin-stack.svg"
 import ExpenseTable from "./ExpenseTable";
 import AddBudgetModal from "./AddBudgetModal";
 import AddExpenseModal from "./AddExpenseModal";
@@ -87,10 +88,10 @@ const ExpensesApp = () => {
   const [budget, setBudget] = useState(40000);
   const [expense, setExpense] = useState(null);
   const [transactions, setTransactions] = useState(expensesData);
-  const [BudgetModalOpen, setBudgetModalOpen] = useState(false);
-  const [ExpenseModalOpen, setExpenseModalOpen] = useState(false);
+  const [budgetModalOpen, setBudgetModalOpen] = useState(false);
+  const [expenseModalOpen, setExpenseModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [EditExpenseModalOpen, setEditExpenseModalOpen] = useState(false);
+  const [editExpenseModalOpen, setEditExpenseModalOpen] = useState(false);
 
   const [selectedTransaction, setSelectedTransaction] = useState(null);
 
@@ -104,7 +105,7 @@ const ExpensesApp = () => {
   };
 
   const handleBudgetModalChange = () => {
-    if (BudgetModalOpen) {
+    if (budgetModalOpen) {
       setBudgetModalOpen(false);
     } else {
       setBudgetModalOpen(true);
@@ -112,7 +113,7 @@ const ExpensesApp = () => {
   };
 
   const handleExpenseModalChange = () => {
-    if (ExpenseModalOpen) {
+    if (expenseModalOpen) {
       setExpenseModalOpen(false);
     } else {
       setExpenseModalOpen(true);
@@ -124,7 +125,7 @@ const ExpensesApp = () => {
     setEditExpenseModalOpen(true);
   };
 
-  const EditModalClose = () => {
+  const editModalClose = () => {
     setEditExpenseModalOpen(false);
   };
 
@@ -192,7 +193,7 @@ const ExpensesApp = () => {
           <ExpenseComponent
             title={"Remaining Budget"}
             budget={budget - expense}
-            image={budgetimage}
+            image={coinstack}
           />
         </div>
         <ExpenseTable
@@ -202,20 +203,20 @@ const ExpensesApp = () => {
           handleDeleteClick={handleDeleteClick}
           handleEditClick={handleEditClick}
         />
-        {BudgetModalOpen && (
+        {budgetModalOpen && (
           <AddBudgetModal
             budget={budget}
             handleBudgetChange={handleBudgetChange}
-            open={BudgetModalOpen}
+            open={budgetModalOpen}
             handleBudgetModalChange={handleBudgetModalChange}
             notification={addBudgetNotify}
           />
         )}
-        {ExpenseModalOpen && (
+        {expenseModalOpen && (
           <AddExpenseModal
             expenseData={transactions}
             handleExpenseData={handleExpenseDataChange}
-            open={ExpenseModalOpen}
+            open={expenseModalOpen}
             handleExpenseModalChange={handleExpenseModalChange}
             notification={addExpenseNotify}
           />
@@ -229,9 +230,9 @@ const ExpensesApp = () => {
             onConfirm={handleConfirmDelete}
           />
         )}
-        {EditExpenseModalOpen && (
+        {editExpenseModalOpen && (
           <EditExpenseModal
-            onClose={EditModalClose}
+            onClose={editModalClose}
             selectedTransaction={selectedTransaction}
             handleEditTransaction={handleEditTransaction}
           />

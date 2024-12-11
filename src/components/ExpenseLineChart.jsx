@@ -11,7 +11,6 @@ export default function ExpenseLineChart({ transactions }) {
       return date1 - date2;
     });
     setExpenses(sortedTransactions);
-    console.log(expenses);
   }, [expenses]);
 
   useEffect(() => {
