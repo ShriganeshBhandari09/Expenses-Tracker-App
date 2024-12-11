@@ -51,7 +51,7 @@ An intuitive **ReactJS-based Expense Tracker** application to manage your financ
 4. **Start the Development Server**
 
    ```bash
-   npm start
+   npm run dev
    ```
 
 5. Open the `http://localhost:5173` in your browser to view the app.
