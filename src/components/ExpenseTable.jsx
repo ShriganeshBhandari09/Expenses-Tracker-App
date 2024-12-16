@@ -19,12 +19,13 @@ const ExpenseTable = ({
   handleExpenseModalChange,
   handleDeleteClick,
   handleEditClick,
+  activeButton,
+  setActiveButton,
 }) => {
   const [searchInput, setSearchInput] = useState("");
   const [filteredTransactions, setFilteredTransactions] =
     useState(transactions);
 
-  const [activeButton, setActiveButton] = useState(0);
   const handleCategoryChange = (buttonname, index) => {
     setActiveButton(index);
     const expensesData = [...transactions];
@@ -34,7 +35,7 @@ const ExpenseTable = ({
     setFilteredTransactions(sortedExpenses);
   };
 
-  const handleAllExpenses = (buttonname,index) => {
+  const handleAllExpenses = (buttonname, index) => {
     setActiveButton(index);
     setFilteredTransactions(transactions);
   };

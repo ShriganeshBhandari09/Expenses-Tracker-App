@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ExpenseComponent from "./common/ExpenseComponent";
 import budgetimage from "../assets/budget.svg";
 import expenseimage from "../assets/expense.svg";
-import coinstack from "../assets/coin-stack.svg"
+import coinstack from "../assets/coin-stack.svg";
 import ExpenseTable from "./ExpenseTable";
 import AddBudgetModal from "./AddBudgetModal";
 import AddExpenseModal from "./AddExpenseModal";
@@ -11,7 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EditExpenseModal from "./EditExpenseModal";
 
- const expensesData = [
+const expensesData = [
   {
     id: 1,
     date: "2024-01-15",
@@ -95,6 +95,8 @@ const ExpensesApp = () => {
 
   const [selectedTransaction, setSelectedTransaction] = useState(null);
 
+  const [activeButton, setActiveButton] = useState(0);
+
   const handleBudgetChange = (newBudget) => {
     setBudget(newBudget);
   };
@@ -153,6 +155,7 @@ const ExpensesApp = () => {
       )
     );
     setDeleteModalOpen(false);
+    setActiveButton(0);
     deleteExpenseNotify();
   };
 
@@ -202,6 +205,8 @@ const ExpensesApp = () => {
           handleExpenseModalChange={handleExpenseModalChange}
           handleDeleteClick={handleDeleteClick}
           handleEditClick={handleEditClick}
+          activeButton={activeButton}
+          setActiveButton={setActiveButton}
         />
         {budgetModalOpen && (
           <AddBudgetModal
