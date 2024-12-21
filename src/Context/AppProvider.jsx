@@ -77,27 +77,41 @@ export const AppContext = createContext();
 // ];
 
 const AppProvider = ({ children }) => {
+  // Budget, Expense, and Transactions variables
   const [budget, setBudget] = useState(null);
   const [expense, setExpense] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
 
+  // All Modal States
   const [budgetModalOpen, setBudgetModalOpen] = useState(false);
   const [expenseModalOpen, setExpenseModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [editExpenseModalOpen, setEditExpenseModalOpen] = useState(false);
 
+  // Button Active State
   const [activeButton, setActiveButton] = useState(0);
 
+  //Toast Notification Functions
   const addBudgetNotify = () => toast.success("Added Budget Successfully");
   const addExpenseNotify = () => toast.success("Added Expense Successfully");
   const editExpenseNotify = () => toast.success("Edited Expense Successfully");
   const deleteExpenseNotify = () => toast.success("Deleted Succesfully");
 
+  //Add Budget & Budget Modal Function Starts
+  const handleBudgetModalClick = () => {
+    setBudgetModalOpen(true);
+  };
+
+  const closeBudgetModal = () => {
+    setBudgetModalOpen(false);
+  };
   const handleBudgetChange = (newBudget) => {
     setBudget(newBudget);
   };
+  //Add Budget & Budget Modal Function Ends
 
+  // Calculate Total Expense
   useEffect(() => {
     const calculateExpense = () => {
       const totalExpense = transactions.reduce((accumulator, transaction) => {
@@ -108,11 +122,21 @@ const AppProvider = ({ children }) => {
     calculateExpense();
   }, [transactions]);
 
+  //Add Expense Data & Expense Modal Function Starts
+  const handleExpenseModalClick = () => {
+    setExpenseModalOpen(true);
+  };
+
+  const closeAddExpenseModal = () => {
+    setExpenseModalOpen(false);
+  };
   const handleExpenseDataChange = (newExpesne) => {
     const newExpensedata = [...transactions, newExpesne];
     setTransactions(newExpensedata);
   };
+  //Add Expense Data & Expense Modal Function Ends
 
+  // Edit Transaction Function & State Starts
   const handleEditClick = (expense) => {
     setSelectedTransaction(expense);
     setEditExpenseModalOpen(true);
@@ -133,7 +157,9 @@ const AppProvider = ({ children }) => {
     setTransactions(editedTransaction);
     editExpenseNotify();
   };
+  // Edit Transaction Function & State Ends
 
+  // Delete Transaction Function & State Starts
   const handleDeleteClick = (expense) => {
     setSelectedTransaction(expense);
     setDeleteModalOpen(true);
@@ -153,22 +179,7 @@ const AppProvider = ({ children }) => {
   const closeDeleteModal = () => {
     setDeleteModalOpen(false);
   };
-
-  const handleBudgetModalClick = () => {
-    setBudgetModalOpen(true);
-  };
-
-  const closeBudgetModal = () => {
-    setBudgetModalOpen(false);
-  };
-
-  const handleExpenseModalClick = () => {
-    setExpenseModalOpen(true);
-  };
-
-  const closeAddExpenseModal = () => {
-    setExpenseModalOpen(false);
-  };
+  // Delete Transaction Function & State Ends
 
   return (
     <AppContext.Provider
