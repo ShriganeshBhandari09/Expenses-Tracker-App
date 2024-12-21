@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../Context/AppProvider";
 
-const EditExpenseModal = ({
-  onClose,
-  selectedTransaction,
-  handleEditTransaction,
-}) => {
+const EditExpenseModal = () => {
+
+  const {selectedTransaction, handleEditTransaction, editModalClose} = useContext(AppContext)
   const [editTransaction, setEditedTransaction] = useState(
     selectedTransaction.description
   );
@@ -59,15 +58,15 @@ const EditExpenseModal = ({
         date: editDate,
         amount: Number(editAmount),
       });
-      onClose();
+      editModalClose();
     }
   };
 
   return (
     <>
-      <div className="opacity" onClick={onClose}></div>
+      <div className="opacity" onClick={editModalClose}></div>
       <div className="add-expense-container">
-        <span className="close-button" onClick={onClose}>
+        <span className="close-button" onClick={editModalClose}>
           &times;
         </span>
         <div className="add-expense-header-container">

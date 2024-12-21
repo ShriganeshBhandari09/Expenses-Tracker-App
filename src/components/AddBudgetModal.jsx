@@ -1,14 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AppContext } from "../Context/AppProvider";
 
-const AddBudgetModal = ({
-  budget,
-  handleBudgetChange,
-  open,
-  handleBudgetModalChange,
-  notification,
-}) => {
+const AddBudgetModal = () => {
+  const { budget, handleBudgetChange, addBudgetNotify, closeBudgetModal } =
+    useContext(AppContext);
+
   const [inputBudget, setInputBudget] = useState(budget);
-  const [isOpen, setIsOpen] = useState(open);
   const [errors, setErrors] = useState({});
 
   const validate = () => {
@@ -26,21 +23,17 @@ const AddBudgetModal = ({
     e.preventDefault();
     if (validate()) {
       handleBudgetChange(inputBudget);
-      handleBudgetModalChange(setIsOpen(!isOpen));
       setInputBudget("");
-      notification();
+      closeBudgetModal();
+      addBudgetNotify();
     }
-  };
-
-  const closePopUp = () => {
-    handleBudgetModalChange(setIsOpen(!isOpen));
   };
 
   return (
     <>
-      <div className="opacity" onClick={closePopUp}></div>
+      <div className="opacity" onClick={closeBudgetModal}></div>
       <div className="add-budget-container">
-        <span className="close-button" onClick={closePopUp}>
+        <span className="close-button" onClick={closeBudgetModal}>
           &times;
         </span>
         <div className="add-budget-header-container">

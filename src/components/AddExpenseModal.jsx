@@ -1,18 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { AppContext } from "../Context/AppProvider";
 
-const AddExpenseModal = ({
-  handleExpenseData,
-  open,
-  handleExpenseModalChange,
-  notification,
-}) => {
+const AddExpenseModal = () => {
+  const { handleExpenseDataChange, addExpenseNotify, closeAddExpenseModal } =
+    useContext(AppContext);
   const [newExpense, setNewExpense] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
   const [newExpenseAmount, setnewExpenseAmount] = useState("");
-  const [isOpen, setIsOpen] = useState(open);
-  // const [id, setid] = useState(0);
   const [errors, setErrors] = useState({});
   const [initialdate, setInitialdate] = useState("");
 
@@ -47,30 +43,26 @@ const AddExpenseModal = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      handleExpenseData({
+      handleExpenseDataChange({
         id: uuidv4(),
         description: newExpense,
         category: category,
         date: date,
         amount: Number(newExpenseAmount),
       });
-      handleExpenseModalChange(setIsOpen(!isOpen));
+      closeAddExpenseModal();
       // console.log("Expense Name", newExpense);
       // console.log("Category", category);
       // console.log("Expense Amount", newExpenseAmount);
-      notification();
+      addExpenseNotify();
     }
-  };
-
-  const closePopUp = () => {
-    handleExpenseModalChange(setIsOpen(!isOpen));
   };
 
   return (
     <>
-      <div className="opacity" onClick={closePopUp}></div>
+      <div className="opacity" onClick={closeAddExpenseModal}></div>
       <div className="add-expense-container">
-        <span className="close-button" onClick={closePopUp}>
+        <span className="close-button" onClick={closeAddExpenseModal}>
           &times;
         </span>
         <div className="add-expense-header-container">

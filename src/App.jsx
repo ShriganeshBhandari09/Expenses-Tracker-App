@@ -2,13 +2,16 @@ import "./App.css";
 import ExpenseApp from "./components/ExpenseApp";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import AppProvider from "./Context/AppProvider";
 
 function App() {
   return (
     <>
-      <Navbar />
-      <ExpenseApp />
-      <Footer/>
+      <AppProvider>
+        <Navbar />
+        <ExpenseApp />
+        <Footer />
+      </AppProvider>
     </>
   );
 }

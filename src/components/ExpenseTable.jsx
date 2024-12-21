@@ -1,6 +1,6 @@
 import editimage from "../assets/edit.svg";
 import deleteimage from "../assets/delete.svg";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import searchimage from "../assets/search.svg";
 import PrimaryButton from "./common/PrimaryButton";
 import addimage from "../assets/add.svg";
@@ -12,16 +12,19 @@ import expenses from "../assets/expenses.svg";
 import SecondaryButton from "./common/SecondaryButton";
 import ExpensesPieChart from "./ExpensesPieChart";
 import ExpenseLineChart from "./ExpenseLineChart";
+import { AppContext } from "../Context/AppProvider";
 
-const ExpenseTable = ({
-  transactions,
-  handleBudgetModalChange,
-  handleExpenseModalChange,
-  handleDeleteClick,
-  handleEditClick,
-  activeButton,
-  setActiveButton,
-}) => {
+const ExpenseTable = () => {
+  const {
+    transactions,
+    handleBudgetModalClick,
+    handleExpenseModalClick,
+    handleDeleteClick,
+    handleEditClick,
+    activeButton,
+    setActiveButton,
+  } = useContext(AppContext);
+
   const [searchInput, setSearchInput] = useState("");
   const [filteredTransactions, setFilteredTransactions] =
     useState(transactions);
@@ -64,15 +67,7 @@ const ExpenseTable = ({
     setFilteredTransactions(transactions);
   }, [transactions]);
 
-  // useEffect(() => {
-  //   const sortedTransactions = transactions.sort(function (a, b) {
-  //     let date1 = new Date(a.date);
-  //     let date2 = new Date(b.date);
-  //     return date1 - date2;
-  //   });
-  //   console.log(sortedTransactions);
-  //   setFilteredTransactions(sortedTransactions);
-  // }, [transactions]);
+
   return (
     <>
       <div className="button-container">
@@ -124,12 +119,12 @@ const ExpenseTable = ({
         <PrimaryButton
           buttonname="Add Budget"
           image={addimage}
-          handelModalChange={handleBudgetModalChange}
+          handelModalChange={handleBudgetModalClick}
         />
         <PrimaryButton
           buttonname="Add Expense"
           image={addimage}
-          handelModalChange={handleExpenseModalChange}
+          handelModalChange={handleExpenseModalClick}
         />
       </div>
       {filteredTransactions?.length > 0 ? (

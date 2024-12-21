@@ -1,23 +1,14 @@
+import { useContext } from "react";
 import exclamation from "../assets/exclamation.png";
 
 import "react-toastify/dist/ReactToastify.css";
-const DeleteBudgetModal = ({ onClose, onConfirm }) => {
-  // const handleDeleteChange = (id) => {
-  //   // const newExpenseData = [...expenseData];
-  //   // console.log(index.target.value)
-  //   // newExpenseData.splice(index, 1);
-  //   const deleteExpense = expenseData.filter((data) => {
-  //     return data.id !== id;
-  //   });
-  //   console.log(deleteExpense);
-  //   handleExpenseDeleteChange(deleteExpense);
-  //   handleDeleteModalChange(setIsOpen(!isOpen));
-  //   delteNotify();
-  // };
+import { AppContext } from "../Context/AppProvider";
+const DeleteBudgetModal = () => {
+  const { closeDeleteModal, handleConfirmDelete } = useContext(AppContext);
 
   return (
     <>
-      <div className="opacity" onClick={() => onClose()}></div>
+      <div className="opacity" onClick={closeDeleteModal}></div>
       <div className="delete-modal-container">
         <div className="delete-modal-img-container">
           <img
@@ -39,13 +30,16 @@ const DeleteBudgetModal = ({ onClose, onConfirm }) => {
           <div
             style={{ display: "flex", gap: "10px", justifyContent: "center" }}
           >
-            <button className="primary-btn" onClick={() => onConfirm()}>
+            <button
+              className="primary-btn"
+              onClick={() => handleConfirmDelete()}
+            >
               Delete
             </button>
             <button
               className="primary-btn"
               style={{ backgroundColor: "#ff2146" }}
-              onClick={() => onClose()}
+              onClick={closeDeleteModal}
             >
               Cancel
             </button>
