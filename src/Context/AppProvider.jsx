@@ -184,11 +184,11 @@ const AppProvider = ({ children }) => {
   };
 
   const handleConfirmDelete = () => {
-    setTransactions((prevTransactions) =>
-      prevTransactions.filter(
-        (expense) => expense.id !== selectedTransaction.id
-      )
+    const deletedTransaction = transactions.filter(
+      (expense) => expense.id !== selectedTransaction.id
     );
+    setTransactions(deletedTransaction);
+    localStorage.setItem("transactions", JSON.stringify(deletedTransaction));
     setDeleteModalOpen(false);
     setActiveButton(0);
     deleteExpenseNotify();
