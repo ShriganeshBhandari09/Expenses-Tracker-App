@@ -421,7 +421,7 @@ input::-webkit-inner-spin-button {
 
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1024px) {
 
   .graphs-container {
     flex-direction: row;

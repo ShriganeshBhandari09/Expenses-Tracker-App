@@ -3,82 +3,82 @@ import { toast } from "react-toastify";
 
 export const AppContext = createContext();
 
-// const expensesData = [
-//   {
-//     id: 1,
-//     date: "2024-01-15",
-//     category: "Travel",
-//     amount: 2200,
-//     description: "Flight booking for international travel",
-//   },
-//   {
-//     id: 2,
-//     date: "2024-02-18",
-//     category: "Food And Drinks",
-//     amount: 250,
-//     description: "Dinner at a restaurant",
-//   },
-//   {
-//     id: 3,
-//     date: "2024-03-05",
-//     category: "Health",
-//     amount: 300,
-//     description: "Check-up for health insurance",
-//   },
-//   {
-//     id: 4,
-//     date: "2024-04-12",
-//     category: "Groceries",
-//     amount: 810,
-//     description: "Grocery run for snacks and drinks",
-//   },
-//   {
-//     id: 5,
-//     date: "2024-05-20",
-//     category: "Travel",
-//     amount: 2500,
-//     description: "Booking for a business trip",
-//   },
-//   {
-//     id: 6,
-//     date: "2024-06-10",
-//     category: "Food And Drinks",
-//     amount: 170,
-//     description: "Lunch at a food court",
-//   },
-//   {
-//     id: 7,
-//     date: "2024-07-01",
-//     category: "Health",
-//     amount: 400,
-//     description: "Vitamins and supplements purchase",
-//   },
-//   {
-//     id: 8,
-//     date: "2024-08-14",
-//     category: "Groceries",
-//     amount: 1050,
-//     description: "Groceries for the month",
-//   },
-//   {
-//     id: 9,
-//     date: "2024-09-18",
-//     category: "Travel",
-//     amount: 2900,
-//     description: "Luxury vacation booking",
-//   },
-//   {
-//     id: 10,
-//     date: "2024-10-05",
-//     category: "Food And Drinks",
-//     amount: 200,
-//     description: "Weekend brunch with friends",
-//   },
-// ];
+const expensesData = [
+  {
+    id: 1,
+    date: "2024-01-15",
+    category: "Travel",
+    amount: 2200,
+    description: "Flight booking for international travel",
+  },
+  {
+    id: 2,
+    date: "2024-02-18",
+    category: "Food And Drinks",
+    amount: 250,
+    description: "Dinner at a restaurant",
+  },
+  // {
+  //   id: 3,
+  //   date: "2024-03-05",
+  //   category: "Health",
+  //   amount: 300,
+  //   description: "Check-up for health insurance",
+  // },
+  // {
+  //   id: 4,
+  //   date: "2024-04-12",
+  //   category: "Groceries",
+  //   amount: 810,
+  //   description: "Grocery run for snacks and drinks",
+  // },
+  // {
+  //   id: 5,
+  //   date: "2024-05-20",
+  //   category: "Travel",
+  //   amount: 2500,
+  //   description: "Booking for a business trip",
+  // },
+  // {
+  //   id: 6,
+  //   date: "2024-06-10",
+  //   category: "Food And Drinks",
+  //   amount: 170,
+  //   description: "Lunch at a food court",
+  // },
+  // {
+  //   id: 7,
+  //   date: "2024-07-01",
+  //   category: "Health",
+  //   amount: 400,
+  //   description: "Vitamins and supplements purchase",
+  // },
+  // {
+  //   id: 8,
+  //   date: "2024-08-14",
+  //   category: "Groceries",
+  //   amount: 1050,
+  //   description: "Groceries for the month",
+  // },
+  // {
+  //   id: 9,
+  //   date: "2024-09-18",
+  //   category: "Travel",
+  //   amount: 2900,
+  //   description: "Luxury vacation booking",
+  // },
+  // {
+  //   id: 10,
+  //   date: "2024-10-05",
+  //   category: "Food And Drinks",
+  //   amount: 200,
+  //   description: "Weekend brunch with friends",
+  // },
+];
 
 const AppProvider = ({ children }) => {
   // Budget, Expense, and Transactions variables
-  const [budget, setBudget] = useState(null);
+  const [budget, setBudget] = useState(0);
   const [expense, setExpense] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
@@ -108,8 +108,24 @@ const AppProvider = ({ children }) => {
   };
   const handleBudgetChange = (newBudget) => {
     setBudget(newBudget);
+    localStorage.setItem("budget", JSON.stringify(newBudget));
   };
   //Add Budget & Budget Modal Function Ends
+
+  // Local Staorage
+  useEffect(() => {
+    const budget = localStorage.getItem("budget");
+    if (budget) {
+      setBudget(JSON.parse(budget));
+    }
+  }, [budget]);
+
+  useEffect(() => {
+    const transactions = localStorage.getItem("transactions");
+    if (transactions) {
+      setTransactions(JSON.parse(transactions));
+    }
+  }, [transactions]);
 
   // Calculate Total Expense
   useEffect(() => {
@@ -133,6 +149,7 @@ const AppProvider = ({ children }) => {
   const handleExpenseDataChange = (newExpesne) => {
     const newExpensedata = [...transactions, newExpesne];
     setTransactions(newExpensedata);
+    localStorage.setItem("transactions", JSON.stringify(newExpensedata));
   };
   //Add Expense Data & Expense Modal Function Ends
 
@@ -155,6 +172,7 @@ const AppProvider = ({ children }) => {
       }
     });
     setTransactions(editedTransaction);
+    localStorage.setItem("transactions", JSON.stringify(editedTransaction));
     editExpenseNotify();
   };
   // Edit Transaction Function & State Ends
